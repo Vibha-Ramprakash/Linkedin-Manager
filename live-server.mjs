@@ -518,6 +518,7 @@ async function runResearch(run) {
         personId: people[index].id,
         fit: people[index].fit,
         timing: people[index].timing,
+        timingSignals: people[index].timingSignals,
         classification: people[index].class,
         qualified: people[index].trendQualified,
         exclusionReasons: people[index].exclusionReasons,
@@ -634,6 +635,11 @@ function validateRunInput(body) {
         size: cleanText(person.size),
         fit: Number(person.fit) || 0,
         timing: Number(person.timing) || 0,
+        timingSignals: Array.isArray(person.timingSignals) ? person.timingSignals.slice(0, 6).map((signal) => ({
+          type: cleanText(signal?.type),
+          detail: cleanText(signal?.detail),
+          sourceIds: Array.isArray(signal?.sourceIds) ? signal.sourceIds.map(cleanText).filter(Boolean).slice(0, 3) : []
+        })) : [],
         class: cleanText(person.class),
         trendQualified: Boolean(person.trendQualified),
         exclusionReasons: Array.isArray(person.exclusionReasons) ? person.exclusionReasons.map(cleanText).slice(0, 6) : [],

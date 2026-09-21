@@ -28,7 +28,7 @@ The Evidence-First Trend Scanner and its required live-data foundation pass dete
 
 ## Automated checks
 
-`node --test trend-engine.test.mjs content-map-engine.test.mjs` passes sixteen tests covering:
+`node --test trend-engine.test.mjs content-map-engine.test.mjs` passes seventeen tests covering:
 
 1. LinkedIn relative-date parsing;
 2. evidence deduplication;
@@ -116,7 +116,10 @@ A temporary Chrome DevTools audit exercised the completed Trend Scanner at 390 C
 
 - The 13 preserved profiles and three current profiles deduplicated to 15 unique LinkedIn leads; the duplicate Dominic Page record resolved to the newer current-run record.
 - People Finder rendered all 15 with current/previous run provenance.
-- Fit Checker ranked all 15 by fit and timing and split them into seven ICP matches and eight non-matches at the saved fit threshold of 65.
+- Fit Checker ranked all 15 by fit and timing, then separated supported ICP matches from outside-ICP exceptions at the visible threshold. A stored `trendQualified: false` record cannot be auto-approved on score alone.
+- The rules and filters render in a compact full-width panel above a two-column lead grid, removing the previous unused left column.
+- Supported promotions, new roles, company moves, expansions, and launches render as explicit major-change callouts. These timing events remain separate from fit and retain source references.
+- Outside-ICP exception approval was verified independently from the automatic drafting state; neither state authorizes sending or publishing.
 - Evidence Writer exposed all 15 names as selectable draft records.
 - Trend Scanner exposed all 15 in Lead coverage while allowing only one evidence-ready qualified lead to influence the current coverage map.
 
@@ -130,7 +133,7 @@ A temporary Chrome DevTools audit exercised the completed Trend Scanner at 390 C
 
 ## Impeccable detector
 
-The detector was run once after implementation. It found two issues: layout-affecting width/height transitions on map bubbles and a heavy one-sided contributor-warning border. Both were removed. Bubbles now animate position, transform, and opacity only; the warning uses a quiet full border.
+The detector was run once after the Fit Checker implementation and returned no layout findings. The earlier Trend Scanner pass had already removed layout-affecting bubble transitions and the heavy one-sided contributor-warning border.
 
 ## Credibility boundaries
 

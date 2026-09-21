@@ -38,12 +38,12 @@ Missing evidence receives zero for that criterion and is listed as unknown. Do n
 2. Score only sourced facts.
 3. Add a reason and source ID for every awarded point group.
 4. Record unknowns and contradictory evidence.
-5. Classify:
-   - `priority-review`: fit 75 or above
-   - `possible`: fit 55 to 74
-   - `not-now`: fit below 55
-6. Use timing only to order people inside a fit class. High timing never rescues poor fit.
-7. Save `fit.json` and `fit-review.md`.
+5. Apply the visible fit threshold:
+   - At or above threshold with supported role and company/market matches: `auto-approved-for-drafting`
+   - Below threshold: `outside-icp-review`
+6. Extract major public changes separately as structured timing signals: new role, promotion, company move, company expansion, or product launch.
+7. Use timing only to order people inside a fit class. High timing never rescues poor fit.
+8. Save `fit.json` and `fit-review.md`.
 
 ## Output contract
 
@@ -52,25 +52,26 @@ Missing evidence receives zero for that criterion and is listed as unknown. Do n
   "person_id": "stable-local-id",
   "fit_score": 82,
   "timing_score": 45,
-  "classification": "priority-review",
+  "classification": "auto-approved-for-drafting",
   "fit_reasons": [
     {"criterion": "role", "points": 30, "source_ids": ["src-01"]}
   ],
   "timing_signals": [
-    {"signal": "promotion", "points": 20, "source_ids": ["src-03"]}
+    {"type": "Role change", "detail": "Promoted to VP Revenue Operations", "points": 20, "source_ids": ["src-03"]}
   ],
   "unknowns": ["budget ownership"],
-  "human_decision": "pending"
+  "human_decision": "auto-approved-for-drafting"
 }
 ```
 
 ## Safety and quality rules
 
 - Fit means match to declared criteria, not personal worth or purchase intent.
-- Timing signals are conversation context, not proof of urgency.
+- Timing signals are conversation context, not proof of urgency. Show their type, detail, and source IDs separately from fit.
 - Never score sensitive personal attributes.
 - Never hide weights or create false precision. Scores are triage aids.
-- Require human approval before a record reaches Evidence Writer.
+- ICP matches may be auto-approved for drafting. Outside-ICP exceptions require human approval before reaching Evidence Writer.
+- Auto-approval never authorizes sending. Every draft remains editable and requires human review before external use.
 
 ## Completion check
 

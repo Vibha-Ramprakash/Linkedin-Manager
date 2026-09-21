@@ -220,9 +220,11 @@ Open **Fit Checker** for the ranked ICP view. The full working set is ordered by
 
 - **All** for the complete ranking;
 - **ICP matches** for leads at or above the visible fit threshold;
-- **Doesn't match** for leads below it.
+- **Outside ICP** for leads below it.
 
-Moving the fit threshold recalculates both groups immediately. A high timing score never overrides a weak ICP fit.
+Moving the fit threshold recalculates both groups immediately. ICP matches are auto-approved for drafting, while outside-ICP exceptions remain in a separate human-review group. This approval only unlocks an editable draft; it never sends, connects, publishes, or schedules anything.
+
+Major public changes appear as a separate gold timing event on the lead card. Supported types include a new role, promotion, company move, company expansion, and product launch. Each event keeps its source reference. A high timing score or major change never overrides a weak ICP fit.
 
 ## Use Evidence Writer and Content Map
 
@@ -268,7 +270,7 @@ Every evidence card retains its source URL, excerpt or paraphrase, source type, 
 
 ## 11. Understand Fit Checker and Evidence Writer
 
-Fit Checker keeps fit and timing separate. A job change, promotion, or launch can affect timing but cannot manufacture ICP fit.
+Fit Checker keeps fit and timing separate. Its rules and filters sit in one compact panel above a full-width lead grid. ICP matches are grouped first and auto-approved for drafting; outside-ICP records are held separately for optional exception review. A job change, promotion, company move, expansion, or launch is highlighted as a sourced timing event but cannot manufacture ICP fit.
 
 Evidence Writer stops at editable drafts. Outreach personalization carries source references in the review version. The Content Map now evaluates each theme across text post, carousel, poll, short video, and single image, then provides:
 

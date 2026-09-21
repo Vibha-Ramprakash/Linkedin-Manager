@@ -70,6 +70,19 @@ test("qualifies only supported role and company matches at fit 65 or above", () 
   assert.ok(irrelevant.exclusionReasons.some((reason) => reason.includes("company")));
 });
 
+test("keeps major role and company changes separate from ICP fit", () => {
+  const changed = qualifiedPerson({
+    promoted: true,
+    personPostsText: "Started a new role leading Revenue Operations.",
+    companyPostsText: "We announced a regional expansion and launched a new forecast workflow."
+  });
+  assert.equal(changed.trendQualified, true);
+  assert.ok(changed.timingSignals.some((signal) => signal.type === "Role change"));
+  assert.ok(changed.timingSignals.some((signal) => signal.type === "Company expansion"));
+  assert.ok(changed.timingSignals.some((signal) => signal.type === "Product launch"));
+  assert.equal(changed.fit, 100);
+});
+
 test("excludes irrelevant profiles, buckets dates, and calculates source diversity", () => {
   const p1 = qualifiedPerson();
   const p2 = qualifiedPerson({ id: "p2", companyId: "c2", company: "Second SaaS", sources: [{ id: "S2" }] });

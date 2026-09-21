@@ -203,6 +203,41 @@ export function scoreQualifiedPerson(person, context = {}) {
   if (/forecast|crm|pipeline|revenue operations|revops/.test(postEvidence)) timing += 25;
   timing = Math.min(100, timing);
 
+  const timingSignals = [];
+  const timingSourceIds = (pattern) => (person.evidenceItems || [])
+    .filter((item) => pattern.test(clean(item.excerpt).toLowerCase()))
+    .map((item) => item.sourceId)
+    .filter(Boolean)
+    .slice(0, 3);
+  if (person.promoted) {
+    timingSignals.push({
+      type: "Role change",
+      detail: "Public profile activity indicates a recent promotion or new role.",
+      sourceIds: person.sources?.slice(0, 1).map((source) => source.id).filter(Boolean) || []
+    });
+  }
+  if (/expansion|new market|new region|opened\s+(?:an?\s+)?office/.test(postEvidence)) {
+    timingSignals.push({
+      type: "Company expansion",
+      detail: "Recent company activity indicates a market, regional, or office expansion.",
+      sourceIds: timingSourceIds(/expansion|new market|new region|opened\s+(?:an?\s+)?office/)
+    });
+  }
+  if (/launch|announc|released|rollout|now available|new product|new feature|new workflow/.test(postEvidence)) {
+    timingSignals.push({
+      type: "Product launch",
+      detail: "Recent public activity contains an explicit product, feature, or workflow announcement.",
+      sourceIds: timingSourceIds(/launch|announc|released|rollout|now available|new product|new feature|new workflow/)
+    });
+  }
+  if (/hiring|headcount|team growth/.test(postEvidence)) {
+    timingSignals.push({
+      type: "Hiring change",
+      detail: "Recent public activity indicates active hiring or team growth.",
+      sourceIds: timingSourceIds(/hiring|headcount|team growth/)
+    });
+  }
+
   const exclusionReasons = [];
   if (!strongRole) exclusionReasons.push(roleScore ? "role is adjacent to the saved ICP" : "current role does not match the saved ICP");
   if (!marketMatch) exclusionReasons.push("company evidence does not support the saved market");
@@ -213,6 +248,7 @@ export function scoreQualifiedPerson(person, context = {}) {
     ...person,
     fit,
     timing,
+    timingSignals,
     class: fit >= 75 ? "Priority review" : fit >= 55 ? "Possible" : "Not now",
     fitBreakdown: {
       role: { score: roleScore, max: 30, supported: strongRole, sourceIds: person.sources?.slice(0, 1).map((source) => source.id) || [] },

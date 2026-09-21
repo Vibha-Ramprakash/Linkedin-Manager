@@ -824,39 +824,64 @@
     .dominance-warning { margin-top: 10px; padding: 9px 10px; border: 1px solid #e7c993; border-radius: 10px; color: #68460f; background: #fff5d9; font-size: 9px; }
     .empty-map { position: absolute; inset: 0; display: grid; place-items: center; padding: 40px; text-align: center; color: var(--muted); font-size: 11px; }
 
-    .score-controls { display: grid; gap: 11px; margin-top: 16px; }
-    .slider-row { display: grid; grid-template-columns: 105px 1fr 35px; gap: 10px; align-items: center; font-size: 10px; font-weight: 800; }
+    .fit-control-panel { margin-bottom: 22px; padding: 17px 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,253,248,.82); }
+    .fit-filter-top { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .fit-filter-copy h3 { margin: 0; font-family: var(--serif); font-size: 23px; }
+    .fit-filter-copy p { max-width: 680px; margin: 5px 0 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+    .fit-threshold-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 22px; margin-top: 16px; }
+    .score-controls { display: grid; gap: 11px; }
+    .slider-row { display: grid; grid-template-columns: 105px minmax(120px, 1fr) 35px; gap: 10px; align-items: center; font-size: 10px; font-weight: 800; }
     input[type="range"] { accent-color: var(--berry); }
+    .rubric-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; margin-top: 15px; overflow: hidden; border: 1px solid var(--line); border-radius: 13px; background: var(--line); }
+    .rubric-item { display: grid; grid-template-columns: auto 1fr; gap: 9px; align-items: center; min-width: 0; padding: 10px 12px; background: var(--paper); }
+    .rubric-item strong { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; color: white; background: var(--berry); font-size: 9px; }
+    .rubric-item span { color: var(--muted); font-size: 8px; line-height: 1.35; }
+    .rubric-item span b { display: block; color: var(--ink); font-size: 9px; }
 
-    .fit-list { display: grid; gap: 11px; }
+    .fit-list { display: grid; gap: 28px; }
+    .fit-section { min-width: 0; }
+    .fit-section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 12px; padding: 0 2px; }
+    .fit-section-head h3 { margin: 0; font-family: var(--serif); font-size: 25px; }
+    .fit-section-head p { margin: 5px 0 0; color: var(--muted); font-size: 10px; }
+    .fit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .fit-card {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 72px 72px auto;
-      gap: 13px;
-      align-items: center;
-      padding: 14px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 15px;
+      align-items: start;
+      min-width: 0;
+      padding: 16px;
       border: 1px solid var(--line);
       border-radius: 16px;
       background: var(--paper);
     }
     .fit-card.match { border-color: #b9d2bf; background: #fbfffc; }
-    .fit-card.mismatch { opacity: .9; }
+    .fit-card.mismatch { border-color: #e4d4c4; background: #fffdfa; }
+    .fit-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .fit-title-row h4 { margin: 0; min-width: 0; font-size: 13px; line-height: 1.35; }
+    .fit-score-cluster { display: flex; gap: 9px; }
+    .fit-score-item { text-align: center; }
     .fit-rank { display: inline-grid; place-items: center; min-width: 30px; height: 24px; margin-right: 7px; border-radius: 8px; color: white; background: var(--night); font-size: 9px; font-weight: 900; }
     .score {
       display: grid;
       place-items: center;
-      width: 62px; height: 62px;
-      border: 6px solid var(--berry-soft);
+      width: 54px; height: 54px;
+      border: 5px solid var(--berry-soft);
       border-top-color: var(--berry);
       border-radius: 50%;
       font-family: var(--serif);
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 900;
     }
     .score.timing { border-color: #f2dfc0; border-top-color: var(--gold); }
     .score-label { text-align: center; color: var(--muted); font-size: 8px; font-weight: 900; text-transform: uppercase; }
     .reasons { margin: 7px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 9px; }
     .reasons li::before { content: "•"; margin-right: 5px; color: var(--berry); }
+    .fit-status-row { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; margin-top: 10px; }
+    .change-callout { display: grid; grid-column: 1 / -1; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: center; padding: 10px 11px; border: 1px solid #e7c993; border-radius: 12px; color: #68460f; background: #fff7df; }
+    .change-callout strong { font-size: 8px; letter-spacing: .06em; text-transform: uppercase; }
+    .change-callout span { font-size: 9px; line-height: 1.4; }
+    .fit-exception-action { grid-column: 1 / -1; justify-self: start; }
 
     .person-tabs { display: flex; gap: 7px; overflow: auto; padding-bottom: 5px; }
     .writer-view-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
@@ -1096,9 +1121,15 @@
       .people-run-note { max-width: none; text-align: left; }
       .field.full { grid-column: auto; }
       .card { padding: 17px; border-radius: 18px; }
-      .fit-card { grid-template-columns: minmax(0, 1fr) 58px 58px; }
-      .fit-card .fit-action { grid-column: 1 / -1; width: 100%; }
+      .fit-grid { grid-template-columns: 1fr; }
       .score { width: 54px; height: 54px; }
+      .fit-filter-top { align-items: flex-start; flex-direction: column; }
+      .fit-threshold-grid, .rubric-strip { grid-template-columns: 1fr; }
+      .fit-filter-top .toolbar-group { width: 100%; }
+      .fit-filter-top .button { flex: 1; }
+      .fit-section-head { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .fit-card { grid-template-columns: 1fr; }
+      .fit-score-cluster { grid-row: 2; }
       .review-banner { grid-template-columns: auto 1fr; }
       .review-banner .button { grid-column: 1 / -1; width: 100%; }
       .content-idea-head { align-items: flex-start; flex-direction: column; }
@@ -1215,7 +1246,7 @@
           <div class="grid four module-row" aria-label="Skill modules">
             <article class="module-card" data-step="1"><span class="tag">Discover</span><h3>People Finder</h3><p>Creates a small, sourced batch from an explicit role and market.</p><span class="mini-status">Skill ready</span></article>
             <article class="module-card" data-step="2"><span class="tag">Listen</span><h3>Trend Scanner</h3><p>Groups repeated questions, complaints, launches, and market changes.</p><span class="mini-status">Skill ready</span></article>
-            <article class="module-card" data-step="3"><span class="tag">Prioritise</span><h3>Fit Checker</h3><p>Scores ICP match and timing separately, with reasons and unknowns.</p><span class="mini-status">Skill ready</span></article>
+            <article class="module-card" data-step="3"><span class="tag">Prioritise</span><h3>Fit Checker</h3><p>Auto-approves ICP matches for drafting and isolates timing signals and exceptions.</p><span class="mini-status">Skill ready</span></article>
             <article class="module-card" data-step="4"><span class="tag">Create</span><h3>Evidence Writer</h3><p>Drafts messages and content ideas from approved, traceable signals.</p><span class="mini-status">Skill ready</span></article>
           </div>
         </section>
@@ -1277,7 +1308,7 @@
               <div class="workflow-step"><span class="num">1</span><div><strong>Verify a read-only route</strong><span>Agent Reach checks the backend. Authentication happens in the connector, not in this file.</span></div></div>
               <div class="workflow-step"><span class="num">2</span><div><strong>Run a small batch</strong><span>Start with a role, market, region, and maximum record count.</span></div></div>
               <div class="workflow-step"><span class="num">3</span><div><strong>Keep every source</strong><span>Unknown stays unknown. Inclusion never means purchase intent.</span></div></div>
-              <div class="workflow-step"><span class="num">4</span><div><strong>Review before writing</strong><span>Only human-approved records reach the drafting step.</span></div></div>
+              <div class="workflow-step"><span class="num">4</span><div><strong>Review the exceptions</strong><span>ICP matches move to drafting automatically; outside-ICP records stay flagged for human review.</span></div></div>
             </div>
           </div>
         </section>
@@ -1383,37 +1414,31 @@
 
         <section class="view" id="view-fit" aria-labelledby="fit-title">
           <div class="section-head">
-            <div><h2 id="fit-title">Fit Checker</h2><p>Score ICP fit and timing separately, with evidence and unknowns kept visible.</p></div>
+            <div><h2 id="fit-title">Fit Checker</h2><p>Separate ICP matches from exceptions, then surface major role and company changes without confusing timing with fit.</p></div>
             <span class="badge good">Transparent rubric</span>
           </div>
-          <div class="grid split">
-            <aside class="card">
-              <p class="kicker">Visible thresholds</p>
-              <h3>Prioritisation rules</h3>
-              <div class="score-controls">
+          <section class="fit-control-panel" aria-labelledby="fit-rules-title">
+            <div class="fit-filter-top">
+              <div class="fit-filter-copy"><h3 id="fit-rules-title">Fit rules</h3><p>Matches at or above the minimum fit are automatically approved for drafting. Sending always remains manual; outside-ICP records stay in human review.</p></div>
+              <div class="toolbar-group" aria-label="ICP ranking filters">
+                <button class="button small active" type="button" data-fit-filter="all" aria-pressed="true">All <span id="fit-all-count">0</span></button>
+                <button class="button small" type="button" data-fit-filter="match" aria-pressed="false">ICP matches <span id="fit-match-count">0</span></button>
+                <button class="button small" type="button" data-fit-filter="mismatch" aria-pressed="false">Outside ICP <span id="fit-mismatch-count">0</span></button>
+              </div>
+            </div>
+            <div class="fit-threshold-grid score-controls">
                 <label class="slider-row" for="fit-threshold"><span>Minimum fit</span><input id="fit-threshold" type="range" min="40" max="90" value="65"><output id="fit-threshold-value">65</output></label>
                 <label class="slider-row" for="timing-threshold"><span>Timing flag</span><input id="timing-threshold" type="range" min="0" max="80" value="35"><output id="timing-threshold-value">35</output></label>
-              </div>
-              <div class="workflow-list">
-                <div class="workflow-step"><span class="num">30</span><div><strong>Role and seniority</strong><span>Public current-role evidence only</span></div></div>
-                <div class="workflow-step"><span class="num">25</span><div><strong>Company match</strong><span>Type and size where supported</span></div></div>
-                <div class="workflow-step"><span class="num">20</span><div><strong>Market and region</strong><span>Compared with saved context</span></div></div>
-                <div class="workflow-step"><span class="num">25</span><div><strong>Problem relevance</strong><span>Evidence-backed responsibility or discussion</span></div></div>
-              </div>
-              <p class="tiny muted">Missing evidence earns no points and stays visible as an unknown.</p>
-            </aside>
-            <article>
-              <div class="toolbar">
-                <div class="toolbar-group" aria-label="ICP ranking filters">
-                  <button class="button small active" type="button" data-fit-filter="all" aria-pressed="true">All <span id="fit-all-count">0</span></button>
-                  <button class="button small" type="button" data-fit-filter="match" aria-pressed="false">ICP matches <span id="fit-match-count">0</span></button>
-                  <button class="button small" type="button" data-fit-filter="mismatch" aria-pressed="false">Doesn't match <span id="fit-mismatch-count">0</span></button>
-                </div>
-                <div class="toolbar-group"><span class="badge berry"><span id="fit-count">0</span> ranked leads</span><button class="button small" id="approve-visible" type="button">Approve ICP matches</button></div>
-              </div>
-              <div class="fit-list" id="fit-list"></div>
-            </article>
-          </div>
+            </div>
+            <div class="rubric-strip" aria-label="Fit score weighting">
+              <div class="rubric-item"><strong>30</strong><span><b>Role and seniority</b>Current-role evidence</span></div>
+              <div class="rubric-item"><strong>25</strong><span><b>Company match</b>Type and size</span></div>
+              <div class="rubric-item"><strong>20</strong><span><b>Market and region</b>Saved context</span></div>
+              <div class="rubric-item"><strong>25</strong><span><b>Problem relevance</b>Public evidence</span></div>
+            </div>
+            <div class="fit-status-row"><span class="badge good"><span id="fit-count">0</span> visible leads</span><span class="tiny muted">Missing evidence earns no points and remains visible as an unknown.</span></div>
+          </section>
+          <div class="fit-list" id="fit-list" aria-live="polite"></div>
         </section>
 
         <section class="view" id="view-writer" aria-labelledby="writer-title">
@@ -1509,6 +1534,7 @@
         },
         selected: ["p1", "p3", "p4", "p5"],
         approved: ["p1", "p3"],
+        manualApprovals: [],
         writerPerson: "p1",
         writerView: "drafts",
         generatedAssets: { "slot-0": true, "slot-1": true },
@@ -1768,7 +1794,7 @@
       }
 
       function isIcpMatch(person) {
-        return numericScore(person.fit) >= state.fitThreshold;
+        return numericScore(person.fit) >= state.fitThreshold && person.trendQualified !== false;
       }
 
       function visibleFitPeople() {
@@ -1777,6 +1803,23 @@
           if (currentFitFilter === "mismatch") return !isIcpMatch(person);
           return true;
         });
+      }
+
+      function timingChangesForPerson(person) {
+        if (Array.isArray(person.timingSignals) && person.timingSignals.length) {
+          return person.timingSignals.map(function (signal) {
+            return typeof signal === "string" ? { type:"Major change", detail:signal } : signal;
+          });
+        }
+        var text = String(person.signal || "");
+        var normalized = text.toLowerCase();
+        var changes = [];
+        if (person.promoted || /promot|new role|new position|started as|joined as/.test(normalized)) changes.push({ type:"Role change", detail:text || "Public profile indicates a recent promotion or new role." });
+        if (/expansion|new market|new region|opened.*office/.test(normalized)) changes.push({ type:"Company expansion", detail:text });
+        if (/launch|announc|released|rollout|now available|new product|new workflow|new feature/.test(normalized)) changes.push({ type:"Product launch", detail:text });
+        if (/hiring|headcount|team growth/.test(normalized)) changes.push({ type:"Hiring change", detail:text });
+        if (/acqui|funding|rebrand|leadership change|new (?:ceo|cro|cmo|vp)/.test(normalized)) changes.push({ type:"Company change", detail:text });
+        return changes.slice(0, 2);
       }
 
       function buildLocalDraft(person) {
@@ -2317,29 +2360,39 @@
           button.classList.toggle("active", active);
           button.setAttribute("aria-pressed", String(active));
         });
-        list.innerHTML = "";
-        visible.forEach(function (person) {
-          var approved = state.approved.indexOf(person.id) !== -1 || state.approved.indexOf(person._sourceId) !== -1;
+        function personCard(person) {
+          var exceptionApproved = state.manualApprovals.indexOf(person.id) !== -1 || state.manualApprovals.indexOf(person._sourceId) !== -1;
           var timingFlag = numericScore(person.timing) >= state.timingThreshold;
           var match = isIcpMatch(person);
           var rank = ranked.findIndex(function (item) { return item.id === person.id; }) + 1;
-          var article = document.createElement("article");
-          article.className = "fit-card " + (match ? "match" : "mismatch");
-          article.innerHTML =
-            '<div><h4><span class="fit-rank">#' + rank + '</span>' + escapeHtml(maskedName(person.name)) + ' · ' + escapeHtml(person.company) + '</h4><span class="badge ' + (match ? "good" : "neutral") + '">' + (match ? "ICP match" : "Does not match") + '</span> <span class="badge ' + (timingFlag ? "warn" : "neutral") + '">' + (timingFlag ? "Timing signal" : "No timing flag") + '</span>' +
-            '<ul class="reasons"><li>' + escapeHtml(person.role) + '</li><li>' + escapeHtml(person.signal) + '</li><li>Unknown: ' + escapeHtml(person.unknown) + '</li></ul></div>' +
-            '<div><div class="score">' + numericScore(person.fit) + '</div><div class="score-label">Fit</div></div>' +
-            '<div><div class="score timing">' + numericScore(person.timing) + '</div><div class="score-label">Timing</div></div>' +
-            '<button class="button small fit-action ' + (approved ? "active" : "") + '" type="button" data-approve="' + escapeHtml(person.id) + '">' + (approved ? "Approved" : "Review") + '</button>';
-          list.appendChild(article);
-        });
+          var changes = timingChangesForPerson(person);
+          var changeMarkup = changes.length
+            ? '<div class="change-callout"><strong>Major change · ' + escapeHtml(changes[0].type || "Timing") + '</strong><span>' + escapeHtml(changes[0].detail || person.signal || "Supported public change detected.") + '</span></div>'
+            : '';
+          var signalReason = changes.length ? '' : '<li>' + escapeHtml(person.signal) + '</li>';
+          var status = match
+            ? '<span class="badge good">Auto-approved</span>'
+            : exceptionApproved
+              ? '<span class="badge good">Exception approved</span>'
+              : '<span class="badge warn">Human review</span>';
+          var action = match ? '' : '<button class="button small fit-exception-action ' + (exceptionApproved ? "active" : "") + '" type="button" data-review-exception="' + escapeHtml(person.id) + '">' + (exceptionApproved ? "Revoke exception" : "Approve exception") + '</button>';
+          return '<article class="fit-card ' + (match ? "match" : "mismatch") + '"><div><div class="fit-title-row"><h4><span class="fit-rank">#' + rank + '</span>' + escapeHtml(maskedName(person.name)) + ' · ' + escapeHtml(person.company) + '</h4>' + status + '</div><div class="fit-status-row"><span class="badge ' + (match ? "good" : "neutral") + '">' + (match ? "ICP match" : "Outside ICP") + '</span><span class="badge ' + (timingFlag ? "warn" : "neutral") + '">' + (timingFlag ? (changes.length ? "Major change" : "Recent relevance") : "No timing flag") + '</span></div><ul class="reasons"><li>' + escapeHtml(person.role) + '</li>' + signalReason + '<li>Unknown: ' + escapeHtml(person.unknown) + '</li></ul></div><div class="fit-score-cluster"><div class="fit-score-item"><div class="score">' + numericScore(person.fit) + '</div><div class="score-label">Fit</div></div><div class="fit-score-item"><div class="score timing">' + numericScore(person.timing) + '</div><div class="score-label">Timing</div></div></div>' + changeMarkup + action + '</article>';
+        }
+        function sectionMarkup(kind, records) {
+          if (!records.length) return '';
+          var isMatchSection = kind === "match";
+          return '<section class="fit-section" aria-labelledby="fit-section-' + kind + '"><div class="fit-section-head"><div><h3 id="fit-section-' + kind + '">' + (isMatchSection ? "ICP matches" : "Outside ICP") + '</h3><p>' + (isMatchSection ? "Automatically approved for drafting from the visible fit rule." : "Held separately for human review; timing never overrides weak fit.") + '</p></div><span class="badge ' + (isMatchSection ? "good" : "warn") + '">' + records.length + ' ' + (isMatchSection ? "auto-approved" : "need review") + '</span></div><div class="fit-grid">' + records.map(personCard).join("") + '</div></section>';
+        }
+        var matches = visible.filter(isIcpMatch);
+        var exceptions = visible.filter(function (person) { return !isIcpMatch(person); });
+        list.innerHTML = sectionMarkup("match", matches) + sectionMarkup("mismatch", exceptions);
         document.getElementById("fit-count").textContent = visible.length;
         if (!visible.length) list.innerHTML = '<div class="card flat"><strong>No leads in this ranking segment.</strong><p class="small-copy">Change the filter or threshold. Do not alter facts to force a match.</p></div>';
-        document.querySelectorAll("[data-approve]").forEach(function (button) {
+        document.querySelectorAll("[data-review-exception]").forEach(function (button) {
           button.addEventListener("click", function () {
-            var id = button.dataset.approve;
-            if (state.approved.indexOf(id) === -1) state.approved.push(id);
-            else state.approved = state.approved.filter(function (value) { return value !== id; });
+            var id = button.dataset.reviewException;
+            if (state.manualApprovals.indexOf(id) === -1) state.manualApprovals.push(id);
+            else state.manualApprovals = state.manualApprovals.filter(function (value) { return value !== id; });
             saveState();
             renderFit();
             renderWriter();
@@ -2773,6 +2826,7 @@
           if (person) {
             person.fit = data.fit;
             person.timing = data.timing;
+            person.timingSignals = data.timingSignals || [];
             person.class = data.classification;
             person.trendQualified = Boolean(data.qualified);
             person.exclusionReasons = data.exclusionReasons || [];
@@ -3071,17 +3125,6 @@
         saveState();
         renderFit();
       });
-      document.getElementById("approve-visible").addEventListener("click", function () {
-        visibleFitPeople().filter(isIcpMatch).forEach(function (person) {
-          if (state.approved.indexOf(person.id) === -1) state.approved.push(person.id);
-        });
-        saveState();
-        renderFit();
-        renderWriter();
-        document.querySelector('[data-view="fit"]').classList.add("done");
-        showToast("Visible records approved for drafting");
-      });
-
       document.getElementById("regenerate-draft").addEventListener("click", function () {
         renderWriter();
         document.querySelector('[data-view="writer"]').classList.add("done");

@@ -80,7 +80,7 @@ The requested amount is a maximum, not a guaranteed result count. The installed 
 
 ## Unified 48-hour lead workspace
 
-Live mode deduplicates the current v2 run and the preserved 19 September profile receipts into one 15-lead working set. People Finder shows all 15 with `Current run` or `Previous run` provenance. Fit Checker ranks the same set by fit score, then timing, and exposes `All`, `ICP matches`, and `Doesn't match` filters. Evidence Writer exposes all 15 as selectable draft tabs, and Review Queue resolves their retained source receipts.
+Live mode deduplicates the current v2 run and the preserved 19 September profile receipts into one 15-lead working set. People Finder shows all 15 with `Current run` or `Previous run` provenance. Fit Checker ranks the same set by fit score, then timing, and exposes `All`, `ICP matches`, and `Outside ICP` filters. Matches are auto-approved for drafting; exceptions are isolated for human review. Public promotions, new roles, company moves, expansions, and launches appear as sourced timing events and never increase ICP fit. Evidence Writer exposes all 15 as selectable draft tabs, and Review Queue resolves their retained source receipts.
 
 Trend Scanner lists all 15 under **Lead coverage**, but only profiles with normalized post evidence can influence the evidence map. A legacy profile with profile/company receipts remains visible as `Profile sources only`; it is not treated as dated trend evidence.
 
