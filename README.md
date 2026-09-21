@@ -1,8 +1,10 @@
 # LinkedIn Signal Analyser
 
-**Public example:** [vibha-ramprakash.github.io/Linkedin-Manager](https://vibha-ramprakash.github.io/Linkedin-Manager/)
+**Public setup guide:** [vibha-ramprakash.github.io/Linkedin-Manager](https://vibha-ramprakash.github.io/Linkedin-Manager/)
 
-The hosted page is an example workspace only. Live LinkedIn research is deliberately local: clone the repository, follow [SETUP-GUIDE.md](SETUP-GUIDE.md), or paste [INSTALL-PROMPT.md](INSTALL-PROMPT.md) into a local coding agent.
+**Example dashboard:** [vibha-ramprakash.github.io/Linkedin-Manager/signal.html](https://vibha-ramprakash.github.io/Linkedin-Manager/signal.html)
+
+The hosted dashboard is an example workspace only. Live LinkedIn research is deliberately local: clone the repository, follow [SETUP-GUIDE.md](SETUP-GUIDE.md), or paste [INSTALL-PROMPT.md](INSTALL-PROMPT.md) into a local coding agent.
 
 A filmable research workspace with two explicitly separate modes:
 
@@ -87,7 +89,7 @@ Trend Scanner lists all 15 under **Lead coverage**, but only profiles with norma
 ## Package contents
 
 - `signal.html`: offline workspace plus the live-mode client
-- `index.html`: GitHub Pages entry point for the hosted example
+- `index.html`: interactive GitHub Pages setup guide and dashboard entry point
 - `INSTALL-PROMPT.md`: copy-paste Agent Reach and LinkedIn setup prompt
 - `live-server.mjs`: localhost-only LinkedIn bridge and event stream
 - `trend-engine.mjs`: evidence normalization, cohort qualification, date bucketing, deduplication, and theme metrics

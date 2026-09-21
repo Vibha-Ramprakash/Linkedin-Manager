@@ -1,17 +1,250 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="0; url=./signal.html">
-    <title>LinkedIn Signal Analyser</title>
-    <link rel="canonical" href="./signal.html">
-  </head>
-  <body>
-    <main>
-      <h1>LinkedIn Signal Analyser</h1>
-      <p>Opening the example workspace. <a href="./signal.html">Continue to the workspace</a>.</p>
-      <p>Live LinkedIn research runs only on your computer; follow the <a href="./SETUP-GUIDE.md">setup guide</a>.</p>
-    </main>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Set up the LinkedIn Signal Analyser with Agent Reach, Claude or Codex, and a local read-only LinkedIn MCP.">
+  <link rel="canonical" href="https://vibha-ramprakash.github.io/Linkedin-Manager/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LinkedIn Signal Analyser · Setup Guide">
+  <meta property="og:description" content="Turn Claude or Codex into an evidence-first LinkedIn research team with Agent Reach and a local read-only LinkedIn MCP.">
+  <meta property="og:url" content="https://vibha-ramprakash.github.io/Linkedin-Manager/">
+  <title>LinkedIn Signal Analyser · Setup Guide</title>
+  <style>
+    :root {
+      --cream: #fff8ef; --cream-2: #f6ebdc; --paper: #fffdf8; --ink: #281d21; --muted: #786a6f;
+      --berry: #8f3f58; --berry-dark: #4b2431; --berry-soft: #f4dce4; --coral: #e17867;
+      --sage: #527360; --sage-soft: #dfece2; --gold: #a36b13; --gold-soft: #f8e8bd;
+      --line: #dbcdbf; --night: #241b20; --shadow: 0 22px 64px rgba(75,36,49,.13);
+      --serif: "Playfair Display", "Iowan Old Style", Baskerville, Georgia, serif;
+      --sans: "DM Sans", "Avenir Next", Avenir, Inter, system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; color: var(--ink); background: radial-gradient(circle at 92% 3%, rgba(225,120,103,.16), transparent 30rem), linear-gradient(135deg, var(--cream), #fffdf9 54%, #f7ecdf); font-family: var(--sans); line-height: 1.55; }
+    button, input { font: inherit; }
+    button, a, input { outline-offset: 3px; }
+    :focus-visible { outline: 3px solid #1f6feb; }
+    a { color: inherit; }
+    code, pre { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+    .skip-link { position: fixed; z-index: 100; top: -60px; left: 12px; padding: 10px 14px; border-radius: 10px; color: white; background: var(--night); }
+    .skip-link:focus { top: 12px; }
+    .site-header { position: sticky; z-index: 40; top: 0; display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 74px; padding: 12px clamp(18px,4vw,64px); border-bottom: 1px solid rgba(143,63,88,.14); background: rgba(255,248,239,.92); backdrop-filter: blur(18px); }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .brand-mark { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; color: var(--cream); background: var(--berry-dark); font-family: var(--serif); font-size: 25px; font-weight: 800; box-shadow: 0 8px 24px rgba(75,36,49,.18); }
+    .brand strong { display: block; font-family: var(--serif); font-size: 17px; line-height: 1.1; }
+    .brand span span { display: block; color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 15px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); background: var(--paper); box-shadow: 0 7px 18px rgba(75,36,49,.06); cursor: pointer; text-decoration: none; font-size: 12px; font-weight: 850; transition: transform .18s ease, box-shadow .18s ease; }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(75,36,49,.1); }
+    .button.primary { color: white; border-color: var(--berry); background: var(--berry); }
+    .button.dark { color: white; border-color: var(--night); background: var(--night); }
+    .button.small { min-height: 38px; padding: 8px 11px; font-size: 10px; }
+    .shell { width: min(1220px, calc(100% - 36px)); margin: 0 auto; }
+    .hero { padding: 46px 0 26px; }
+    .hero-card { position: relative; display: grid; grid-template-columns: minmax(0,1.2fr) minmax(330px,.8fr); gap: clamp(30px,5vw,74px); overflow: hidden; padding: clamp(28px,5vw,66px); border: 1px solid rgba(255,255,255,.1); border-radius: 30px; color: #fff8f2; background: radial-gradient(circle at 88% 4%, rgba(225,120,103,.34), transparent 25rem), linear-gradient(140deg, var(--berry-dark), var(--night)); box-shadow: var(--shadow); }
+    .hero-card::after { position: absolute; right: -90px; bottom: -150px; width: 360px; height: 360px; border: 1px solid rgba(255,255,255,.1); border-radius: 50%; content: ""; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 7px 10px; border: 1px solid rgba(255,255,255,.15); border-radius: 999px; color: #f6dce4; background: rgba(255,255,255,.08); font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: #8bd3a4; box-shadow: 0 0 0 4px rgba(139,211,164,.12); }
+    h1 { max-width: 790px; margin: 18px 0 16px; font-family: var(--serif); font-size: clamp(47px,6.5vw,84px); line-height: .98; letter-spacing: -.045em; }
+    .hero-copy { max-width: 720px; margin: 0; color: #ddcfd4; font-size: clamp(15px,1.6vw,19px); line-height: 1.55; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+    .hero .button { min-height: 48px; }
+    .hero .button.primary { border-color: var(--coral); background: var(--coral); }
+    .hero .button.secondary { color: white; border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.08); }
+    .hero-panel { position: relative; z-index: 1; align-self: end; padding: 19px; border: 1px solid rgba(255,255,255,.13); border-radius: 20px; background: rgba(255,255,255,.07); backdrop-filter: blur(10px); }
+    .panel-label { color: #cbb9c0; font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .hero-flow { display: grid; gap: 8px; margin-top: 12px; }
+    .hero-step { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; padding: 10px; border-radius: 13px; background: rgba(255,255,255,.07); }
+    .hero-step strong { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; color: var(--night); background: var(--cream); font-size: 11px; }
+    .hero-step span { font-size: 11px; font-weight: 800; }
+    .hero-step b { color: #9de0b3; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+    .stat-row { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); margin-top: 16px; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--line); gap: 1px; }
+    .stat { padding: 18px 20px; background: rgba(255,253,248,.94); }
+    .stat strong { display: block; color: var(--berry); font-family: var(--serif); font-size: 31px; line-height: 1; }
+    .stat span { display: block; margin-top: 6px; color: var(--muted); font-size: 9px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .page-grid { display: grid; grid-template-columns: 250px minmax(0,1fr); gap: 32px; align-items: start; padding: 26px 0 70px; }
+    .guide-nav { position: sticky; top: 98px; padding: 17px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,253,248,.86); }
+    .guide-nav p { margin: 0 0 10px; color: var(--muted); font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .guide-nav ol { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+    .guide-nav a { display: block; padding: 9px 10px; border-radius: 10px; color: var(--muted); text-decoration: none; font-size: 11px; font-weight: 750; }
+    .guide-nav a:hover, .guide-nav a.active { color: var(--ink); background: var(--berry-soft); }
+    .nav-note { margin-top: 15px; padding: 12px; border-radius: 13px; color: #dde7df; background: var(--sage); font-size: 10px; }
+    .nav-note strong { display: block; color: white; }
+    .guide-content { min-width: 0; }
+    .section { scroll-margin-top: 98px; margin-bottom: 24px; padding: clamp(22px,4vw,36px); border: 1px solid var(--line); border-radius: 22px; background: rgba(255,253,248,.9); box-shadow: 0 12px 36px rgba(75,36,49,.07); }
+    .section-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-bottom: 20px; }
+    .kicker { margin: 0 0 7px; color: var(--berry); font-size: 9px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    h2 { margin: 0; font-family: var(--serif); font-size: clamp(31px,4vw,44px); line-height: 1.08; letter-spacing: -.025em; }
+    h3 { margin: 0; font-family: var(--serif); font-size: 23px; line-height: 1.15; }
+    .section-intro { max-width: 760px; margin: 9px 0 0; color: var(--muted); font-size: 13px; }
+    .badge { display: inline-flex; align-items: center; width: fit-content; min-height: 28px; padding: 6px 9px; border-radius: 999px; color: var(--berry-dark); background: var(--berry-soft); font-size: 8px; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
+    .badge.good { color: #264f34; background: var(--sage-soft); }
+    .badge.warn { color: #6b470c; background: var(--gold-soft); }
+    .mode-grid, .safety-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+    .mode-card, .skill-card, .safety-card { min-width: 0; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+    .mode-card p, .skill-card p, .safety-card p { margin: 7px 0 13px; color: var(--muted); font-size: 11px; }
+    .skill-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+    .skill-card { position: relative; padding-top: 46px; }
+    .skill-number { position: absolute; top: 14px; left: 16px; color: var(--berry); font-size: 10px; font-weight: 950; }
+    .skill-card h3 { font-size: 18px; }
+    .notice { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; margin-top: 16px; padding: 15px; border: 1px solid #e8cf9c; border-radius: 15px; color: #654710; background: #fff6da; font-size: 11px; }
+    .notice strong { display: block; margin-bottom: 3px; color: #573b09; }
+    .notice-mark { display: grid; place-items: center; width: 29px; height: 29px; border-radius: 9px; color: white; background: var(--gold); font-weight: 900; }
+    .prompt-card { overflow: hidden; border: 1px solid #4b3b43; border-radius: 18px; background: var(--night); box-shadow: 0 18px 42px rgba(36,27,32,.18); }
+    .prompt-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 14px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .prompt-head span { color: #d9cbd0; font-size: 10px; font-weight: 850; }
+    .prompt-card pre { max-height: 380px; margin: 0; overflow: auto; padding: 18px; color: #f8edf1; background: transparent; white-space: pre-wrap; font-size: 10.5px; line-height: 1.65; }
+    .steps { display: grid; gap: 12px; }
+    .step { display: grid; grid-template-columns: 44px minmax(0,1fr); gap: 14px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+    .step-number { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; color: white; background: var(--berry); font-family: var(--serif); font-size: 20px; font-weight: 900; }
+    .step p { margin: 6px 0 0; color: var(--muted); font-size: 11px; }
+    .command { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; align-items: center; margin-top: 11px; padding: 10px 11px; border-radius: 11px; color: #f9edf2; background: var(--night); }
+    .command code { overflow-x: auto; white-space: nowrap; font-size: 9.5px; }
+    .copy-command { min-height: 32px; padding: 6px 8px; border: 1px solid rgba(255,255,255,.14); border-radius: 8px; color: white; background: rgba(255,255,255,.08); cursor: pointer; font-size: 8px; font-weight: 900; text-transform: uppercase; }
+    .checklist { display: grid; gap: 9px; margin-top: 16px; }
+    .check-row { display: grid; grid-template-columns: auto 1fr auto; gap: 11px; align-items: center; padding: 13px 14px; border: 1px solid var(--line); border-radius: 13px; background: var(--paper); }
+    .check-row input { width: 19px; height: 19px; accent-color: var(--sage); }
+    .check-row strong { display: block; font-size: 11px; }
+    .check-row span span { color: var(--muted); font-size: 9px; }
+    .check-row.done { border-color: #b8d3bf; background: #f7fcf8; }
+    .progress { margin-top: 13px; height: 8px; overflow: hidden; border-radius: 999px; background: var(--cream-2); }
+    .progress span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--sage); transition: width .35s ease; }
+    .progress-copy { margin-top: 7px; color: var(--muted); font-size: 9px; font-weight: 800; }
+    .evidence-flow { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; margin-top: 14px; }
+    .flow-card { position: relative; padding: 17px; border: 1px solid var(--line); border-radius: 15px; background: var(--paper); }
+    .flow-card:not(:last-child)::after { position: absolute; top: 50%; right: -10px; z-index: 2; transform: translate(50%,-50%); color: var(--berry); content: "→"; font-weight: 900; }
+    .flow-card span { display: block; color: var(--berry); font-size: 8px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .flow-card strong { display: block; margin-top: 7px; font-family: var(--serif); font-size: 18px; }
+    .flow-card p { margin: 5px 0 0; color: var(--muted); font-size: 10px; }
+    details { border: 1px solid var(--line); border-radius: 14px; background: var(--paper); }
+    details + details { margin-top: 9px; }
+    summary { padding: 14px 16px; cursor: pointer; font-size: 11px; font-weight: 850; }
+    details p { margin: 0; padding: 0 16px 16px; color: var(--muted); font-size: 10.5px; }
+    .cta-card { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center; padding: clamp(24px,4vw,40px); border-radius: 24px; color: white; background: linear-gradient(135deg,var(--berry),var(--berry-dark)); box-shadow: var(--shadow); }
+    .cta-card h2 { font-size: clamp(31px,4vw,48px); }
+    .cta-card p { max-width: 680px; margin: 8px 0 0; color: #ecdde2; font-size: 12px; }
+    .cta-actions { display: flex; gap: 9px; flex-wrap: wrap; justify-content: flex-end; }
+    footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 28px 0 40px; color: var(--muted); font-size: 10px; }
+    footer nav { display: flex; gap: 14px; flex-wrap: wrap; }
+    .toast { position: fixed; z-index: 80; right: 18px; bottom: 18px; transform: translateY(16px); padding: 11px 14px; border-radius: 11px; color: white; background: var(--night); box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: .2s ease; font-size: 10px; font-weight: 800; }
+    .toast.show { transform: none; opacity: 1; }
+    @media (max-width: 960px) { .hero-card { grid-template-columns: 1fr; } .page-grid { grid-template-columns: 1fr; } .guide-nav { position: static; overflow-x: auto; } .guide-nav ol { display: flex; min-width: max-content; } .guide-nav a { white-space: nowrap; } .nav-note { display: none; } .skill-grid, .evidence-flow { grid-template-columns: repeat(2,minmax(0,1fr)); } .flow-card::after { display: none; } }
+    @media (max-width: 640px) {
+      .site-header { align-items: flex-start; padding: 10px 13px; } .brand span span { display: none; } .header-actions .button:first-child { display: none; } .header-actions .button { min-height: 42px; padding: 8px 10px; }
+      .shell { width: min(100% - 24px,1220px); } .hero { padding-top: 18px; } .hero-card { padding: 25px 20px; border-radius: 23px; } h1 { font-size: clamp(43px,14vw,59px); } .hero-copy { font-size: 14px; }
+      .hero-actions .button { width: 100%; } .stat-row { grid-template-columns: repeat(2,minmax(0,1fr)); } .stat { padding: 14px; } .stat strong { font-size: 28px; }
+      .section { padding: 20px 17px; border-radius: 18px; } .section-head { align-items: flex-start; flex-direction: column; } .mode-grid, .skill-grid, .safety-grid, .evidence-flow { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 36px minmax(0,1fr); padding: 15px; } .step-number { width: 36px; height: 36px; font-size: 17px; } .command { grid-template-columns: 1fr; } .copy-command { width: 100%; }
+      .check-row { grid-template-columns: auto 1fr; } .check-row .badge { grid-column: 2; } .cta-card { grid-template-columns: 1fr; padding: 25px 20px; } .cta-actions { width: 100%; justify-content: flex-start; } .cta-actions .button { width: 100%; } footer { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .001ms !important; animation-duration: .001ms !important; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to guide</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="LinkedIn Signal Analyser guide home"><span class="brand-mark" aria-hidden="true">S</span><span><strong>Signal Analyser</strong><span>Setup and operating guide</span></span></a>
+    <div class="header-actions"><a class="button" href="https://github.com/Vibha-Ramprakash/Linkedin-Manager" target="_blank" rel="noreferrer">View repository</a><a class="button primary" href="./signal.html">Open dashboard <span aria-hidden="true">→</span></a></div>
+  </header>
+
+  <main id="main">
+    <div class="shell hero" id="top">
+      <section class="hero-card" aria-labelledby="page-title">
+        <div><span class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Free local setup · human reviewed</span><h1 id="page-title">Turn Claude or Codex into a LinkedIn research team.</h1><p class="hero-copy">Install four skills, connect a local read-only LinkedIn route, and turn sourced people and company research into trends, fit scores, outreach drafts, and a content map.</p><div class="hero-actions"><a class="button primary" href="#prompt">Copy the setup prompt</a><a class="button secondary" href="./signal.html">Preview the dashboard</a></div></div>
+        <aside class="hero-panel" aria-label="Research workflow summary"><span class="panel-label">One research run</span><div class="hero-flow"><div class="hero-step"><strong>01</strong><span>Find people and companies</span><b>Sourced</b></div><div class="hero-step"><strong>02</strong><span>Scan posts and changes</span><b>Read only</b></div><div class="hero-step"><strong>03</strong><span>Check ICP fit and timing</span><b>Auditable</b></div><div class="hero-step"><strong>04</strong><span>Draft outreach and content</span><b>Review</b></div></div></aside>
+      </section>
+      <div class="stat-row" aria-label="System summary"><div class="stat"><strong>4</strong><span>Shareable skills</span></div><div class="stat"><strong>6</strong><span>Read-only tools</span></div><div class="stat"><strong>2</strong><span>Separate modes</span></div><div class="stat"><strong>0</strong><span>Automatic sends</span></div></div>
+    </div>
+
+    <div class="shell page-grid">
+      <aside class="guide-nav" aria-label="Guide sections"><p>On this page</p><ol><li><a href="#overview" class="active">What you are installing</a></li><li><a href="#prompt">Setup prompt</a></li><li><a href="#install">Install in five steps</a></li><li><a href="#checklist">Setup checklist</a></li><li><a href="#workflow">How the workflow runs</a></li><li><a href="#safety">Safety and boundaries</a></li><li><a href="#troubleshooting">Troubleshooting</a></li></ol><div class="nav-note"><strong>Hosted dashboard</strong>The public workspace uses example data. Live reads stay on your computer.</div></aside>
+      <div class="guide-content">
+        <section class="section" id="overview">
+          <div class="section-head"><div><p class="kicker">Start here</p><h2>What you are installing</h2><p class="section-intro">A local research workflow that keeps evidence visible from the first profile through the final draft.</p></div><span class="badge good">Open source setup</span></div>
+          <div class="mode-grid"><article class="mode-card"><span class="badge">Example run</span><h3>Explore without LinkedIn</h3><p>Open the hosted dashboard, use the built-in records, and inspect every workflow before installing anything.</p><a class="button small" href="./signal.html">Open example dashboard</a></article><article class="mode-card"><span class="badge good">Live run</span><h3>Research from your computer</h3><p>Use your own authenticated session through a localhost bridge. Credentials and browser data stay outside the page.</p><a class="button small" href="#install">See local setup</a></article></div>
+          <div class="notice"><span class="notice-mark" aria-hidden="true">!</span><div><strong>Live access is conditional.</strong>The LinkedIn connector is independent and unofficial. LinkedIn can change its interface or restrict automated access. Login, CAPTCHA, and security checkpoints always remain human controlled.</div></div>
+        </section>
+
+        <section class="section" id="prompt">
+          <div class="section-head"><div><p class="kicker">Fastest setup</p><h2>Paste one prompt into your coding agent</h2><p class="section-intro">Use this in Codex, Claude Code, OpenClaw, Cursor, or another local agent that can run terminal commands.</p></div><span class="badge">Copy ready</span></div>
+          <div class="prompt-card"><div class="prompt-head"><span>LinkedIn Signal Analyser setup prompt</span><button class="button small" type="button" data-copy-target="master-prompt">Copy prompt</button></div><pre id="master-prompt">Set up the LinkedIn Signal Analyser from this repository on my computer:
+https://github.com/Vibha-Ramprakash/Linkedin-Manager
+
+Read README.md, SETUP-GUIDE.md, and the four SKILL.md files before changing anything. Keep the project in a new dedicated folder. Never copy credentials, cookies, browser profiles, or real lead data into the repository.
+
+Install Agent Reach from its current official GitHub guide and set up only the LinkedIn channel. Show me what is missing and ask before any system-level install or configuration write.
+
+Pause for me to complete the one-time LinkedIn login, confirmation, CAPTCHA, or security checkpoint. Never ask for my LinkedIn password or bypass a checkpoint.
+
+After login, verify the connection with a real, non-empty, read-only get_my_profile call and one people search. Configuration detection alone is not proof that LinkedIn works.
+
+Run the repository tests, start node live-server.mjs, and open http://127.0.0.1:4317. Confirm that the dashboard shows LinkedIn connected · live read only after the successful profile read.
+
+Keep every LinkedIn action serial, small-batch, and read-only. Allow only search_people, get_person_profile, get_company_profile, get_company_posts, search_posts, and close_session. Never connect, follow, message, read inboxes, publish, schedule, modify a profile, or replace an empty live result with example data.
+
+When finished, give me the Agent Reach version, LinkedIn verification result, local dashboard URL, remaining manual steps, and the account-risk warning.</pre></div>
+        </section>
+
+        <section class="section" id="install">
+          <div class="section-head"><div><p class="kicker">Local installation</p><h2>Install in five steps</h2><p class="section-intro">Let the agent do the mechanical setup. Keep system changes and authentication under your control.</p></div><span class="badge warn">One-time login required</span></div>
+          <div class="steps">
+            <article class="step"><span class="step-number">1</span><div><h3>Clone the project and inspect the skills</h3><p>The repository contains People Finder, Trend Scanner, Fit Checker, and Evidence Writer skill files, plus the dashboard and local bridge.</p><div class="command"><code id="cmd-clone">git clone https://github.com/Vibha-Ramprakash/Linkedin-Manager.git</code><button class="copy-command" type="button" data-copy-target="cmd-clone">Copy</button></div></div></article>
+            <article class="step"><span class="step-number">2</span><div><h3>Install the LinkedIn research route</h3><p>Follow Agent Reach's current official guide. The tested setup installs only the LinkedIn channel.</p><div class="command"><code id="cmd-agent">agent-reach install --env=auto --system --channels=linkedin</code><button class="copy-command" type="button" data-copy-target="cmd-agent">Copy</button></div></div></article>
+            <article class="step"><span class="step-number">3</span><div><h3>Complete the human login</h3><p>A visible browser opens. You complete sign-in and any security checkpoint yourself.</p><div class="command"><code id="cmd-login">uvx mcp-server-linkedin@latest --login</code><button class="copy-command" type="button" data-copy-target="cmd-login">Copy</button></div></div></article>
+            <article class="step"><span class="step-number">4</span><div><h3>Verify two harmless reads</h3><p>The connection counts as working only when your profile and one people search return real, non-empty records.</p><div class="command"><code id="cmd-verify">mcporter call linkedin.get_my_profile sections="experience"</code><button class="copy-command" type="button" data-copy-target="cmd-verify">Copy</button></div></div></article>
+            <article class="step"><span class="step-number">5</span><div><h3>Start the local dashboard</h3><p>Serve the workspace from localhost. Do not use a file URL for live research.</p><div class="command"><code id="cmd-start">node live-server.mjs</code><button class="copy-command" type="button" data-copy-target="cmd-start">Copy</button></div></div></article>
+          </div>
+        </section>
+
+        <section class="section" id="checklist">
+          <div class="section-head"><div><p class="kicker">Your progress</p><h2>Confirm each setup milestone</h2><p class="section-intro">This checklist is stored only in this browser. It never checks or uploads credentials.</p></div><span class="badge good" id="progress-badge">0 of 5 complete</span></div>
+          <div class="checklist"><label class="check-row"><input type="checkbox" data-check="repo"><span><strong>Repository downloaded</strong><span>The four skills and local bridge are present.</span></span><span class="badge">Project</span></label><label class="check-row"><input type="checkbox" data-check="reach"><span><strong>Agent Reach inspected</strong><span>The LinkedIn route appears in the diagnostic.</span></span><span class="badge">Route</span></label><label class="check-row"><input type="checkbox" data-check="login"><span><strong>Human login completed</strong><span>No password or checkpoint was handled by the agent.</span></span><span class="badge warn">Manual</span></label><label class="check-row"><input type="checkbox" data-check="read"><span><strong>Live read verified</strong><span>Profile and people-search calls returned real records.</span></span><span class="badge good">Proof</span></label><label class="check-row"><input type="checkbox" data-check="server"><span><strong>Local dashboard running</strong><span>The workspace is available at 127.0.0.1:4317.</span></span><span class="badge good">Ready</span></label></div>
+          <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div><div class="progress-copy" id="progress-copy" aria-live="polite">Complete the five checks before starting a live run.</div>
+        </section>
+
+        <section class="section" id="workflow">
+          <div class="section-head"><div><p class="kicker">Inside the workspace</p><h2>One evidence trail, four working skills</h2><p class="section-intro">Every downstream output keeps the source, retrieval time, supported fields, and unknowns visible.</p></div><a class="button small primary" href="./signal.html">Open dashboard</a></div>
+          <div class="skill-grid"><article class="skill-card"><span class="skill-number">01</span><h3>People Finder</h3><p>Searches a small batch by role and market, then inspects profiles and company context.</p></article><article class="skill-card"><span class="skill-number">02</span><h3>Trend Scanner</h3><p>Maps repeated questions, complaints, launches, recent activity, and wider shifts from qualified evidence.</p></article><article class="skill-card"><span class="skill-number">03</span><h3>Fit Checker</h3><p>Separates ICP fit from timing and flags promotions, new roles, company moves, and launches.</p></article><article class="skill-card"><span class="skill-number">04</span><h3>Evidence Writer</h3><p>Creates editable outreach drafts and a format-aware LinkedIn content schedule with source references.</p></article></div>
+          <div class="evidence-flow" aria-label="Evidence workflow"><article class="flow-card"><span>Collect</span><strong>People + companies</strong><p>Small, serial batches with provenance.</p></article><article class="flow-card"><span>Qualify</span><strong>Supported ICP</strong><p>Role, company, region, and problem evidence.</p></article><article class="flow-card"><span>Interpret</span><strong>Trends + timing</strong><p>Deduplicated posts and major changes.</p></article><article class="flow-card"><span>Draft</span><strong>Human review</strong><p>Outreach and content, never auto-sent.</p></article></div>
+        </section>
+
+        <section class="section" id="safety">
+          <div class="section-head"><div><p class="kicker">Credibility boundaries</p><h2>What the system will and will not do</h2><p class="section-intro">The setup is designed for inspectable research, not hands-off LinkedIn activity.</p></div><span class="badge good">Read only</span></div>
+          <div class="safety-grid"><article class="safety-card"><span class="badge good">Included</span><h3>Research and drafting</h3><p>People search, public profiles, company context, public posts, trend analysis, fit scoring, timing events, drafts, and content planning.</p></article><article class="safety-card"><span class="badge warn">Excluded</span><h3>Account actions</h3><p>No connecting, following, messaging, inbox access, publishing, scheduling, profile changes, CAPTCHA bypass, or silent example-data fallback.</p></article></div>
+          <div class="notice"><span class="notice-mark" aria-hidden="true">i</span><div><strong>Use small, serial batches.</strong>This improves inspectability and personalization, but it does not guarantee account safety or platform permission. Stop if LinkedIn or your organisation blocks the activity.</div></div>
+        </section>
+
+        <section class="section" id="troubleshooting">
+          <div class="section-head"><div><p class="kicker">When something fails</p><h2>Troubleshooting without faking success</h2><p class="section-intro">A failed or empty live run stays failed or empty. The dashboard never fills it with example profiles.</p></div><a class="button small" href="https://github.com/Vibha-Ramprakash/Linkedin-Manager/blob/main/SETUP-GUIDE.md" target="_blank" rel="noreferrer">Read full operating guide</a></div>
+          <details open><summary>LinkedIn connection needs attention</summary><p>Keep the visible browser open, complete any login or checkpoint yourself, then repeat the same harmless profile read. A configured connector is not proof of a live session.</p></details><details><summary>The search returned zero people</summary><p>Keep the live result empty. Try one recognizable role, one city, and plain market language later. Do not rapidly loop searches or substitute example records.</p></details><details><summary>I requested ten people but received three</summary><p>Ten is a maximum request, not a guarantee. The connector exposes no pagination or result-limit parameter. Keep the returned records, then use Add to run later if you need another small batch.</p></details><details><summary>Trend Scanner has fewer contributors than People Finder</summary><p>Only leads with supported role and company evidence can influence themes. Profiles without dated post evidence remain available for fit, drafting, and review but stay outside trend totals.</p></details><details><summary>The visible browser closed or the run was interrupted</summary><p>Completed evidence remains available. Restart the local bridge, verify the live read again, and do not assume unseen steps finished.</p></details>
+        </section>
+
+        <section class="cta-card" aria-labelledby="cta-title"><div><p class="kicker" style="color:#f5ccd8">Ready to explore</p><h2 id="cta-title">See the complete research workspace.</h2><p>The hosted dashboard uses example data so you can inspect People Finder, Trend Scanner, Fit Checker, Evidence Writer, and Review Queue before connecting anything.</p></div><div class="cta-actions"><a class="button" href="./signal.html">Open dashboard</a><a class="button dark" href="https://github.com/Vibha-Ramprakash/Linkedin-Manager" target="_blank" rel="noreferrer">Get the repository</a></div></section>
+      </div>
+    </div>
+  </main>
+
+  <div class="shell"><footer><span>LinkedIn Signal Analyser · Research first, draft second, review before use.</span><nav aria-label="Footer links"><a href="./signal.html">Dashboard</a><a href="./SETUP-GUIDE.md">Markdown guide</a><a href="./QA-REPORT.md">QA report</a><a href="./THIRD-PARTY-NOTICES.md">Notices</a></nav></footer></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    (function () {
+      "use strict";
+      var CHECK_KEY = "linkedin-signal-guide-progress-v1";
+      var toastTimer;
+      function showToast(message) { var toast = document.getElementById("toast"); toast.textContent = message; toast.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 1800); }
+      function copyText(text) { if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text); var area = document.createElement("textarea"); area.value = text; area.setAttribute("readonly", ""); area.style.position = "fixed"; area.style.opacity = "0"; document.body.appendChild(area); area.select(); document.execCommand("copy"); area.remove(); return Promise.resolve(); }
+      document.querySelectorAll("[data-copy-target]").forEach(function (button) { button.addEventListener("click", function () { var target = document.getElementById(button.dataset.copyTarget); if (!target) return; copyText(target.textContent.trim()).then(function () { showToast(button.dataset.copyTarget === "master-prompt" ? "Setup prompt copied" : "Command copied"); }); }); });
+      var saved = {}; try { saved = JSON.parse(localStorage.getItem(CHECK_KEY)) || {}; } catch (error) {}
+      var checks = Array.from(document.querySelectorAll("[data-check]"));
+      function renderProgress() { var complete = checks.filter(function (input) { return input.checked; }).length; checks.forEach(function (input) { input.closest(".check-row").classList.toggle("done", input.checked); }); document.getElementById("progress-bar").style.width = (complete / checks.length * 100) + "%"; document.getElementById("progress-badge").textContent = complete + " of " + checks.length + " complete"; document.getElementById("progress-copy").textContent = complete === checks.length ? "Setup checklist complete. You are ready to start a small live run." : "Complete " + (checks.length - complete) + " more check" + (checks.length - complete === 1 ? "" : "s") + " before a live run."; }
+      checks.forEach(function (input) { input.checked = Boolean(saved[input.dataset.check]); input.addEventListener("change", function () { saved[input.dataset.check] = input.checked; localStorage.setItem(CHECK_KEY, JSON.stringify(saved)); renderProgress(); }); });
+      renderProgress();
+      var sectionLinks = Array.from(document.querySelectorAll(".guide-nav a[href^='#']"));
+      var sections = sectionLinks.map(function (link) { return document.querySelector(link.getAttribute("href")); }).filter(Boolean);
+      if ("IntersectionObserver" in window) { var observer = new IntersectionObserver(function (entries) { entries.forEach(function (entry) { if (!entry.isIntersecting) return; sectionLinks.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id); }); }); }, { rootMargin: "-22% 0px -68%", threshold: 0 }); sections.forEach(function (section) { observer.observe(section); }); }
+    }());
+  </script>
+</body>
 </html>

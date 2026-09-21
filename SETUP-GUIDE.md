@@ -1,8 +1,10 @@
 # LinkedIn Signal Analyser: Shareable Setup and Operating Guide
 
-Hosted example: [https://vibha-ramprakash.github.io/Linkedin-Manager/](https://vibha-ramprakash.github.io/Linkedin-Manager/)
+Hosted setup guide: [https://vibha-ramprakash.github.io/Linkedin-Manager/](https://vibha-ramprakash.github.io/Linkedin-Manager/)
 
-For agent-led installation, paste the complete prompt in [`INSTALL-PROMPT.md`](INSTALL-PROMPT.md). The hosted page is intentionally example-only; authentication and live reads stay on the recipient's computer.
+Example dashboard: [https://vibha-ramprakash.github.io/Linkedin-Manager/signal.html](https://vibha-ramprakash.github.io/Linkedin-Manager/signal.html)
+
+For agent-led installation, paste the complete prompt in [`INSTALL-PROMPT.md`](INSTALL-PROMPT.md). The hosted dashboard is intentionally example-only; authentication and live reads stay on the recipient's computer.
 
 This package turns Claude or Codex into a small, human-reviewed LinkedIn research workflow. It can find public profiles, inspect company and post context, qualify an ICP cohort, map recurring themes, and draft evidence-linked outreach and content plans.
 
