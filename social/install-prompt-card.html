@@ -7,268 +7,123 @@
     <style>
       :root {
         --ink: #2a1b20;
-        --wine: #5a2638;
-        --berry: #a23d62;
-        --rose: #d47a85;
+        --wine: #67263e;
+        --berry: #9f3a5f;
         --paper: #fffaf4;
-        --cream: #f4e8dc;
-        --line: #dcc8bd;
-        --green: #315f4b;
-        --gold: #a86a13;
+        --wash: #faeef1;
+        --line: #dfc8c1;
       }
 
       * { box-sizing: border-box; }
 
-      html, body {
+      html,
+      body {
         width: 1080px;
         height: 1920px;
         margin: 0;
         overflow: hidden;
+        background: transparent;
       }
 
       body {
         color: var(--ink);
-        background:
-          radial-gradient(circle at 91% 3%, rgba(212, 122, 133, .24), transparent 27%),
-          radial-gradient(circle at 8% 95%, rgba(168, 106, 19, .12), transparent 23%),
-          linear-gradient(145deg, #fffaf4 0%, #f9eee6 58%, #f4e5df 100%);
         font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
 
       .canvas {
-        position: relative;
-        width: 1080px;
-        height: 1920px;
-        padding: 70px 68px 62px;
-      }
-
-      .grain {
-        position: absolute;
-        inset: 0;
-        opacity: .17;
-        pointer-events: none;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
-        mix-blend-mode: multiply;
-      }
-
-      .topline {
-        position: relative;
-        z-index: 1;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        margin-bottom: 42px;
-      }
-
-      .eyebrow {
-        font-size: 22px;
-        line-height: 1;
-        font-weight: 850;
-        letter-spacing: .12em;
-        text-transform: uppercase;
-        color: var(--wine);
-      }
-
-      .step {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 14px 18px;
-        border: 1px solid rgba(90, 38, 56, .16);
-        border-radius: 999px;
-        background: rgba(255, 250, 244, .72);
-        color: var(--wine);
-        font-size: 18px;
-        font-weight: 800;
-        letter-spacing: .05em;
-      }
-
-      .dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background: #3d7d60;
-        box-shadow: 0 0 0 7px rgba(61, 125, 96, .11);
-      }
-
-      h1 {
-        position: relative;
-        z-index: 1;
-        max-width: 900px;
-        margin: 0;
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: 83px;
-        line-height: .99;
-        letter-spacing: -.045em;
-        font-weight: 700;
-      }
-
-      .deck {
-        position: relative;
-        z-index: 1;
-        max-width: 870px;
-        margin: 27px 0 38px;
-        font-size: 29px;
-        line-height: 1.35;
-        color: #735f66;
+        justify-content: center;
+        width: 1080px;
+        height: 1920px;
+        padding: 72px 64px;
+        background: transparent;
       }
 
       .prompt {
-        position: relative;
-        z-index: 1;
-        overflow: hidden;
-        border: 1px solid rgba(90, 38, 56, .16);
-        border-radius: 32px;
-        background: rgba(255, 252, 248, .92);
-        box-shadow: 0 30px 80px rgba(73, 38, 45, .12);
+        width: 952px;
+        padding: 52px 48px 55px;
+        border: 1.5px solid rgba(103, 38, 62, .19);
+        border-radius: 36px;
+        background: rgba(255, 250, 244, .985);
+        box-shadow:
+          0 40px 90px rgba(46, 25, 31, .18),
+          0 7px 22px rgba(46, 25, 31, .10);
       }
 
-      .prompt-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 82px;
-        padding: 0 30px;
-        border-bottom: 1px solid var(--line);
-        background: linear-gradient(90deg, rgba(90, 38, 56, .055), rgba(212, 122, 133, .07));
+      .prompt p {
+        margin: 0 0 27px;
+        font-size: 30px;
+        line-height: 1.43;
+        letter-spacing: -.015em;
       }
 
-      .window-dots { display: flex; gap: 10px; }
-      .window-dots span { width: 13px; height: 13px; border-radius: 50%; }
-      .window-dots span:nth-child(1) { background: var(--berry); }
-      .window-dots span:nth-child(2) { background: #d69a38; }
-      .window-dots span:nth-child(3) { background: #4d876c; }
+      .prompt p:last-child { margin-bottom: 0; }
 
-      .copy-label {
-        padding: 11px 15px;
-        border-radius: 10px;
-        background: var(--wine);
-        color: #fffaf5;
-        font-size: 17px;
-        font-weight: 850;
-        letter-spacing: .08em;
-        text-transform: uppercase;
+      .prompt strong {
+        color: var(--wine);
+        font-weight: 820;
       }
 
-      .prompt-copy {
-        padding: 39px 42px 43px;
-        font-size: 29px;
-        line-height: 1.42;
-        letter-spacing: -.012em;
-      }
-
-      .prompt-copy p { margin: 0 0 25px; }
-      .prompt-copy p:last-child { margin-bottom: 0; }
-
-      .prompt-copy strong {
-        font-weight: 830;
+      .lead {
+        font-size: 33px !important;
+        line-height: 1.34 !important;
+        font-weight: 790;
         color: var(--wine);
       }
 
       .repo {
         display: block;
-        margin: 16px 0 29px;
-        padding: 20px 22px;
-        border: 1px solid rgba(162, 61, 98, .22);
-        border-radius: 15px;
-        background: #faeef1;
-        color: #842d51;
+        margin: 5px 0 31px;
+        padding: 22px 24px;
+        border: 1px solid rgba(159, 58, 95, .23);
+        border-radius: 16px;
+        background: var(--wash);
+        color: #87304f;
         font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 23px;
-        font-weight: 700;
-        line-height: 1.35;
+        font-size: 24px;
+        font-weight: 720;
+        line-height: 1.36;
         word-break: break-word;
       }
 
       .rule {
-        margin: 27px 0;
         height: 1px;
-        background: linear-gradient(90deg, var(--line), transparent);
+        margin: 29px 0;
+        background: linear-gradient(90deg, var(--line), rgba(223, 200, 193, .15));
       }
 
-      .footer {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 18px;
-        margin-top: 27px;
-      }
-
-      .note {
-        display: flex;
-        align-items: center;
-        min-height: 74px;
-        padding: 16px 19px;
-        border: 1px solid rgba(90, 38, 56, .13);
-        border-radius: 18px;
-        background: rgba(255, 250, 244, .67);
-        font-size: 17px;
-        line-height: 1.25;
-        font-weight: 820;
-        letter-spacing: .055em;
-        text-transform: uppercase;
+      code {
         color: var(--wine);
-      }
-
-      .note::before {
-        content: "";
-        flex: 0 0 auto;
-        width: 12px;
-        height: 12px;
-        margin-right: 12px;
-        border-radius: 50%;
-        background: var(--green);
-      }
-
-      .note:last-child::before { background: var(--gold); }
-
-      .accent {
-        position: absolute;
-        right: -88px;
-        top: 365px;
-        width: 188px;
-        height: 188px;
-        border: 35px solid rgba(162, 61, 98, .13);
-        border-radius: 50%;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: .88em;
+        font-weight: 760;
       }
     </style>
   </head>
   <body>
     <main class="canvas">
-      <div class="grain"></div>
-      <div class="accent"></div>
+      <section class="prompt" aria-label="Copy-paste LinkedIn setup prompt">
+        <p class="lead">Set up this LinkedIn research system on my computer:</p>
 
-      <div class="topline">
-        <div class="eyebrow">Signal Analyser · Setup</div>
-        <div class="step"><span class="dot"></span> One prompt</div>
-      </div>
+        <span class="repo">github.com/Vibha-Ramprakash/<br>Linkedin-Manager</span>
 
-      <h1>Copy this into<br>Codex or Claude.</h1>
-      <p class="deck">It installs the research stack, pauses for your LinkedIn login, verifies a real read, and launches the dashboard.</p>
+        <p>Follow <strong>INSTALL-PROMPT.md</strong> and <strong>SETUP-GUIDE.md</strong> exactly.</p>
 
-      <section class="prompt" aria-label="Copy-paste setup prompt">
-        <div class="prompt-bar">
-          <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="copy-label">Copy + paste</div>
-        </div>
+        <p>Install Agent Reach from its official GitHub guide. Run the safe check first, show me what is missing, and ask before making system-level changes. Configure only LinkedIn.</p>
 
-        <div class="prompt-copy">
-          <p><strong>Set up this LinkedIn research system on my computer:</strong></p>
-          <span class="repo">github.com/Vibha-Ramprakash/<br>Linkedin-Manager</span>
-          <p>Follow <strong>INSTALL-PROMPT.md</strong> and <strong>SETUP-GUIDE.md</strong> exactly.</p>
-          <p>Install Agent Reach from its official GitHub guide. Run the safe check first and ask before system-level changes. Configure only LinkedIn.</p>
-          <div class="rule"></div>
-          <p>Open the login browser and pause while I sign in manually. Verify the connection with a real, non-empty <strong>get_my_profile</strong> read.</p>
-          <p>Run the tests, start <strong>node live-server.mjs</strong>, then open <strong>127.0.0.1:4317</strong>.</p>
-          <p>Keep every run small-batch, serial, and read-only. Never connect, message, publish, or replace empty live results with example data.</p>
-        </div>
+        <p>Use the repository’s <code>config/mcporter.json</code> so the LinkedIn browser stays visible, slowed down, and reusable throughout the run.</p>
+
+        <div class="rule"></div>
+
+        <p>Open the login browser with <code>uvx mcp-server-linkedin@latest --login</code>, then pause while I sign in manually. Never request my password or bypass a security checkpoint.</p>
+
+        <p>Verify the connection with a real, non-empty <code>get_my_profile</code> read. Configuration alone does not count as verification.</p>
+
+        <p>Run the tests, start <code>node live-server.mjs</code>, then open <code>127.0.0.1:4317</code>.</p>
+
+        <p>Keep every LinkedIn run small-batch, serial, and read-only. Never connect, message, publish, or replace empty live results with example data.</p>
       </section>
-
-      <footer class="footer">
-        <div class="note">Human login stays manual</div>
-        <div class="note">Live research stays local</div>
-      </footer>
     </main>
   </body>
 </html>
