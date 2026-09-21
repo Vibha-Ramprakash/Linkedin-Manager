@@ -1160,7 +1160,7 @@
             <button class="mode-option active" type="button" data-mode="example" aria-pressed="true">Example run</button>
             <button class="mode-option" type="button" data-mode="live" aria-pressed="false">Live run</button>
           </div>
-          <span class="demo-disclosure" id="connection-disclosure" role="status" aria-live="polite">Example data · no live LinkedIn session</span>
+          <span class="demo-disclosure" id="connection-disclosure" role="status" aria-live="polite" hidden></span>
           <button class="button small ghost" id="privacy-toggle" type="button" aria-pressed="false">Recording privacy</button>
           <button class="button small" id="film-toggle" type="button" aria-pressed="false">Film mode</button>
           <button class="button small ghost" id="reset-demo" type="button">Reset workspace</button>
@@ -1347,7 +1347,7 @@
             <div class="lens-intro"><div><h3>Conversation intelligence</h3><p>Recurring questions and complaints from qualified people and companies, deduplicated before they influence a theme.</p></div><span class="scan-note">Bubble size = mentions<br>Position = source breadth</span></div>
             <div class="trend-workspace">
               <article class="card coverage-card">
-                <div class="toolbar"><div><p class="kicker">Evidence coverage</p><h3><span id="trend-item-count">0</span> unique evidence items</h3></div><span class="badge warn" id="trend-state-badge">Sample · not sentiment</span></div>
+                <div class="toolbar"><div><p class="kicker">Evidence coverage</p><h3><span id="trend-item-count">0</span> unique evidence items</h3></div><span class="badge warn" id="trend-state-badge" hidden></span></div>
                 <div class="coverage-map" id="coverage-map" role="group" aria-label="Theme coverage map. Horizontal position shows unique sources. Vertical position shows represented people and companies.">
                   <span class="coverage-axis y">People + companies represented</span>
                   <span class="coverage-axis x">Unique sources →</span>
@@ -1862,6 +1862,7 @@
         var disclosure = document.getElementById("connection-disclosure");
         disclosure.textContent = text;
         disclosure.dataset.tone = tone || "example";
+        disclosure.hidden = !text;
       }
 
       function updateWorkspaceContext() {
@@ -1906,7 +1907,7 @@
           node.dataset.count = pipelineCounts[index];
           node.textContent = pipelineCounts[index];
         });
-        if (state.mode === "example") setDisclosure("Example data · no live LinkedIn session", "example");
+        if (state.mode === "example") setDisclosure("", "example");
       }
 
       function setRunStrip(status, label, meta) {
@@ -2029,7 +2030,9 @@
         document.getElementById("cohort-sources").textContent = trendCohort.uniqueSources || 0;
         document.getElementById("cohort-dated").textContent = trendCohort.datedEvidence || 0;
         document.getElementById("cohort-undated").textContent = trendCohort.undatedEvidence || 0;
-        document.getElementById("trend-state-badge").textContent = trendProvisional ? "Updating · provisional" : state.mode === "live" ? "Live source coverage" : "Example · not sentiment";
+        var trendStateBadge = document.getElementById("trend-state-badge");
+        trendStateBadge.hidden = state.mode !== "live";
+        trendStateBadge.textContent = trendProvisional ? "Updating · provisional" : "Live source coverage";
         document.querySelectorAll("[data-days]").forEach(function (button) {
           var active = Number(button.dataset.days) === state.days;
           button.classList.toggle("active", active);
