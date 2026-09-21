@@ -4,6 +4,8 @@
 
 The hosted page is an example workspace only. Live LinkedIn research is deliberately local: clone the repository, follow [SETUP-GUIDE.md](SETUP-GUIDE.md), or paste [INSTALL-PROMPT.md](INSTALL-PROMPT.md) into a local coding agent.
 
+For videos and social posts, use the ready-made [9:16 setup-prompt card](social/install-prompt-card.png). Its editable HTML source is included beside it.
+
 A filmable research workspace with two explicitly separate modes:
 
 - **Example run** works offline with locally stored example records.
@@ -89,6 +91,8 @@ Trend Scanner lists all 15 under **Lead coverage**, but only profiles with norma
 - `signal.html`: offline workspace plus the live-mode client
 - `index.html`: GitHub Pages entry point for the hosted example
 - `INSTALL-PROMPT.md`: copy-paste Agent Reach and LinkedIn setup prompt
+- `social/install-prompt-card.png`: 1080×1920 video-overlay card with the shortened setup prompt
+- `social/install-prompt-card.html`: editable source for the prompt card
 - `live-server.mjs`: localhost-only LinkedIn bridge and event stream
 - `trend-engine.mjs`: evidence normalization, cohort qualification, date bucketing, deduplication, and theme metrics
 - `trend-engine.test.mjs`: deterministic evidence and additive-run fixtures
