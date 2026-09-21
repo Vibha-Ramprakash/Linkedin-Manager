@@ -1,6 +1,6 @@
 # LinkedIn Signal Analyser QA Report
 
-Date: 20 September 2026
+Date: 21 September 2026
 
 ## Result
 
@@ -28,7 +28,7 @@ The Evidence-First Trend Scanner and its required live-data foundation pass dete
 
 ## Automated checks
 
-`node --test trend-engine.test.mjs content-map-engine.test.mjs` passes fifteen tests covering:
+`node --test trend-engine.test.mjs content-map-engine.test.mjs` passes sixteen tests covering:
 
 1. LinkedIn relative-date parsing;
 2. evidence deduplication;
@@ -44,7 +44,8 @@ The Evidence-First Trend Scanner and its required live-data foundation pass dete
 12. Product / Offer frequency control;
 13. non-repeating hook formulae;
 14. small-sample and concentration blockers; and
-15. evidence-backed numeric hooks.
+15. evidence-backed numeric hooks; and
+16. explicit product-launch separation from broader AI and market shifts.
 
 `live-server.mjs`, `trend-engine.mjs`, `content-map-engine.mjs`, and the inline dashboard script pass syntax validation.
 
@@ -72,6 +73,11 @@ People Finder now exposes a keyboard-operable `3 / 5 / 10` selector adjacent to 
 
 ## Trend Scanner interface
 
+- Four direct, keyboard-operable views now lead the page: What people discuss, Recent activity, Product launches, and Industry shifts.
+- Recent activity sorts dated person posts, company posts, and market-search results chronologically and retains theme matches and source actions.
+- Product launches require explicit launch, announcement, release, rollout, availability, or new-product language and are labelled `Observed announcement` rather than buyer intent.
+- Industry shifts report breadth and representative evidence while explicitly avoiding a velocity claim from a single window.
+- The public example contains 19 clearly labelled illustrative receipts. Live mode uses the identical components with real source URLs and retrieval times from the local connector.
 - Frequency bars were replaced by an evidence coverage map.
 - Horizontal position represents unique sources.
 - Vertical position represents distinct people plus companies.
@@ -82,7 +88,7 @@ People Finder now exposes a keyboard-operable `3 / 5 / 10` selector adjacent to 
 - The evidence stack shows excerpt, subject, source type, date/relative age, retrieval time, and Open source.
 - Raw source-ID prose and the quoted “No suitable excerpt” fallback were removed.
 - Contributor concentration over 50% produces a visible, text-labelled warning.
-- Switching from 30 to 7 days changed the deduplicated evidence count from five to four and updated the map, evidence cards, observation, and interpretation.
+- Switching from 30 to 7 days recalculated every view: conversations changed from six themes to four, recent activity from 19 receipts to six, launches from three to two, and industry shifts from two to one.
 
 ## Responsive and accessibility checks
 
@@ -96,6 +102,7 @@ A temporary Chrome DevTools audit exercised the completed Trend Scanner at 390 C
 - `prefers-reduced-motion: reduce` reduced transition and animation duration to 0.000001 seconds.
 - Time-window buttons expose `aria-pressed`; the selected theme exposes `aria-pressed`; status regions remain polite live regions.
 - Browser accessibility inspection exposed the Observed, Interpretation, and Content angle headings, the editable textbox, all evidence metadata, and all direct source links.
+- Left/Right/Home/End keyboard navigation moves between the four Trend Scanner tabs and updates the selected tab and visible panel together.
 
 ## Storage migration
 

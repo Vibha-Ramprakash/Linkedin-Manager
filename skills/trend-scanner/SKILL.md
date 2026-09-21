@@ -33,7 +33,7 @@ Use the smallest query set that answers the research question. If post access is
 4. Normalize every inspected item with an ID, source ID, person/company IDs, source type, URL, excerpt, published or relative date when available, retrieval time, and matched terms.
 5. Deduplicate by canonical URL, source type, and normalized excerpt. Additive runs merge evidence sets and recompute; never add previous aggregate counts.
 6. Exclude undated evidence from 7/14/30-day totals while keeping it visible as `undated` in sample quality.
-7. Code each item into one or more signal types: `question`, `complaint`, `launch`, or `company-change`.
+7. Code each item into one or more signal types: `question`, `complaint`, `launch`, `company-change`, or `market-change`. Apply `launch` only when the source text contains explicit launch, announcement, release, rollout, availability, or new-product language.
 8. Group similar items into themes and count each evidence item no more than once per theme.
 9. Separate exact observation metrics from cautious interpretation and the editable content angle.
 10. Save `trends.json` and `trend-brief.md`.
@@ -83,6 +83,9 @@ Use the smallest query set that answers the research question. If post access is
 - If no profiles qualify, return no themes. A broad market-post search can enrich a qualified cohort but cannot replace one.
 - Warn when one person or company supplies more than half of a theme.
 - Every evidence card must resolve to its source URL and show retrieval time.
+- Present the result through four inspectable views: recurring conversations, chronological recent activity, explicit product launches, and broader industry/company shifts.
+- Label launches as observed announcements. Do not infer adoption, demand, or purchase intent from an announcement.
+- Label industry shifts as current-window signals. Do not claim direction or velocity without a comparable earlier window.
 
 ## Completion check
 

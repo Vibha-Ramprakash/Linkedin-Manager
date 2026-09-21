@@ -237,6 +237,15 @@ The first text post and PDF carousel slide copy are pre-generated. Remaining slo
 
 Trend Scanner runs automatically inside the People Finder workflow. There is no separate scrape button.
 
+Use the four views directly beneath the Trend Scanner heading:
+
+1. **What people discuss** for recurring questions, complaints, and themes across the qualified sample.
+2. **Recent activity** for the chronological person, company, and market posts scanned in the selected 7/14/30-day window.
+3. **Product launches** for explicit launch, release, rollout, and availability announcements. These are observations, not inferred buying intent.
+4. **Industry shifts** for broader company and market-search signals. The view reports source breadth but does not claim trend velocity from one snapshot.
+
+Changing the 7/14/30-day control recalculates all four views from dated evidence. Undated receipts remain visible in sample quality but cannot enter a time-window count. In example mode, source actions are labelled as example receipts; in live mode, every supported card links back to the permitted LinkedIn URL returned by the connector.
+
 The **Lead coverage** section always shows the full deduplicated 48-hour working set. `Profile sources only` means the lead remains usable in People Finder, Fit Checker, Evidence Writer, and the source ledger, but does not have normalized dated post evidence for trend aggregation. This keeps previous live leads available without importing unsupported legacy trend totals.
 
 As each qualified profile finishes:

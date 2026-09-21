@@ -681,6 +681,86 @@
     .quality-stat span { display: block; color: var(--muted); font-size: 8px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
     .quality-stat strong { display: block; margin-top: 2px; font-family: var(--serif); font-size: 24px; line-height: 1; }
     .trend-status-note { margin: 0 0 14px; padding: 11px 14px; border: 1px solid #e7c993; border-radius: 13px; color: #68460f; background: #fff5d9; font-size: 10px; font-weight: 750; }
+    .trend-lens-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin: 0 0 14px;
+    }
+    .trend-lens-tab {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 58px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+      background: rgba(255,253,248,.78);
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+      font-size: 10px;
+      font-weight: 850;
+      line-height: 1.25;
+    }
+    .trend-lens-tab strong {
+      display: grid;
+      place-items: center;
+      min-width: 29px;
+      height: 29px;
+      padding: 0 7px;
+      border-radius: 999px;
+      color: var(--berry-dark);
+      background: var(--berry-soft);
+      font-family: var(--serif);
+      font-size: 15px;
+    }
+    .trend-lens-tab:hover { border-color: #c6adb6; background: #fffaf7; }
+    .trend-lens-tab[aria-selected="true"] { color: white; border-color: var(--night); background: var(--night); box-shadow: 0 8px 24px rgba(45,25,32,.16); }
+    .trend-lens-tab[aria-selected="true"] strong { color: var(--night); background: white; }
+    .trend-panel[hidden] { display: none; }
+    .lens-intro {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 4px 0 15px;
+      padding: 2px 2px 13px;
+      border-bottom: 1px solid var(--line);
+    }
+    .lens-intro h3 { margin: 0; font-family: var(--serif); font-size: 27px; line-height: 1.05; }
+    .lens-intro p { max-width: 610px; margin: 7px 0 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+    .lens-intro .scan-note { flex: 0 0 auto; color: var(--muted); font-size: 9px; font-weight: 800; text-align: right; }
+    .activity-feed { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,253,248,.78); overflow: hidden; }
+    .activity-row {
+      display: grid;
+      grid-template-columns: 105px minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: start;
+      padding: 17px 18px;
+      border-bottom: 1px solid #eee2dc;
+    }
+    .activity-row:last-child { border-bottom: 0; }
+    .activity-source { color: var(--muted); font-size: 8px; font-weight: 850; letter-spacing: .06em; text-transform: uppercase; }
+    .activity-source strong { display: block; margin-top: 6px; color: var(--ink); font-size: 10px; letter-spacing: 0; line-height: 1.35; text-transform: none; }
+    .activity-copy p { margin: 0; color: var(--ink); font-size: 11px; line-height: 1.55; }
+    .activity-copy .metric-row { margin-top: 8px; }
+    .activity-date { min-width: 84px; color: var(--muted); font-size: 9px; font-weight: 750; text-align: right; }
+    .activity-date a { display: block; margin-top: 10px; color: var(--berry-dark); font-weight: 900; }
+    .signal-board { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+    .signal-card { min-width: 0; padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,253,248,.86); }
+    .signal-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .signal-card h4 { margin: 7px 0 0; font-family: var(--serif); font-size: 20px; line-height: 1.15; }
+    .signal-card p { margin: 12px 0 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+    .signal-card .activity-date { min-width: 68px; }
+    .signal-proof { margin-top: 14px; padding-top: 12px; border-top: 1px solid #eee2dc; }
+    .signal-proof strong { display: block; font-size: 9px; }
+    .signal-proof span { display: block; margin-top: 4px; color: var(--muted); font-size: 9px; line-height: 1.5; }
+    .source-placeholder { display: inline-flex; margin-top: 9px; color: var(--muted); font-size: 8px; font-weight: 850; text-transform: uppercase; }
+    .activity-date .source-placeholder { display: block; max-width: 92px; margin-left: auto; line-height: 1.35; }
+    .lens-empty { padding: 42px 24px; border: 1px dashed #d9c9c0; border-radius: 18px; color: var(--muted); background: rgba(255,253,248,.6); text-align: center; font-size: 11px; }
     .trend-workspace { display: grid; grid-template-columns: minmax(0, 1.28fr) minmax(330px, .92fr); gap: 16px; align-items: start; }
     .coverage-card { min-width: 0; }
     .coverage-map {
@@ -974,6 +1054,8 @@
       .topbar { top: 62px; }
       .hero-grid, .split { grid-template-columns: 1fr; }
       .trend-workspace { grid-template-columns: 1fr; }
+      .trend-lens-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .signal-board { grid-template-columns: 1fr; }
       .theme-detail-card { position: static; }
       .hero h2 { font-size: clamp(48px, 10vw, 78px); }
       .grid.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -999,6 +1081,14 @@
       .status-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .trend-quality-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .quality-stat:last-child { grid-column: 1 / -1; }
+      .trend-lens-tabs { display: flex; overflow-x: auto; padding-bottom: 3px; scrollbar-width: none; }
+      .trend-lens-tabs::-webkit-scrollbar { display: none; }
+      .trend-lens-tab { flex: 0 0 190px; }
+      .lens-intro { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .lens-intro .scan-note { text-align: left; }
+      .activity-row { grid-template-columns: 1fr; gap: 8px; }
+      .activity-date { text-align: left; }
+      .activity-date a { display: inline-flex; margin: 0 0 0 10px; }
       .coverage-map { min-height: 340px; padding-left: 44px; }
       .grid.two, .grid.three, .grid.four, .people-grid, .form-grid, .prior-people-grid, .trend-lead-grid { grid-template-columns: 1fr; }
       .people-run-controls { justify-items: stretch; width: 100%; }
@@ -1232,7 +1322,7 @@
 
         <section class="view" id="view-trends" aria-labelledby="trends-title">
           <div class="section-head">
-            <div><h2 id="trends-title">Trend Scanner</h2><p>Review repeated questions, complaints, launches, and market changes across the selected period.</p></div>
+            <div><h2 id="trends-title">Trend Scanner</h2><p>See what your ICP is discussing, their latest activity, product launches, and wider industry shifts—with the source behind every signal.</p></div>
             <div class="toolbar-group" aria-label="Trend time window">
               <button class="button small" type="button" data-days="7" aria-pressed="false">7 days</button>
               <button class="button small" type="button" data-days="14" aria-pressed="false">14 days</button>
@@ -1240,6 +1330,12 @@
             </div>
           </div>
           <p class="trend-status-note" id="trend-migration-notice" hidden>Fresh run required for evidence coverage. Your previous live snapshot remains stored separately.</p>
+          <div class="trend-lens-tabs" role="tablist" aria-label="Trend Scanner views">
+            <button class="trend-lens-tab" type="button" role="tab" aria-selected="true" aria-controls="trend-panel-conversation" id="trend-tab-conversation" data-trend-lens="conversation"><span>What people discuss</span><strong id="lens-count-conversation">0</strong></button>
+            <button class="trend-lens-tab" type="button" role="tab" aria-selected="false" aria-controls="trend-panel-activity" id="trend-tab-activity" data-trend-lens="activity"><span>Recent activity</span><strong id="lens-count-activity">0</strong></button>
+            <button class="trend-lens-tab" type="button" role="tab" aria-selected="false" aria-controls="trend-panel-launches" id="trend-tab-launches" data-trend-lens="launches"><span>Product launches</span><strong id="lens-count-launches">0</strong></button>
+            <button class="trend-lens-tab" type="button" role="tab" aria-selected="false" aria-controls="trend-panel-industry" id="trend-tab-industry" data-trend-lens="industry"><span>Industry shifts</span><strong id="lens-count-industry">0</strong></button>
+          </div>
           <div class="trend-quality-strip" aria-label="Trend sample quality">
             <div class="quality-stat"><span>Workspace leads</span><strong id="cohort-collected">0</strong></div>
             <div class="quality-stat"><span>Trend qualified</span><strong id="cohort-qualified">0</strong></div>
@@ -1247,22 +1343,37 @@
             <div class="quality-stat"><span>Dated evidence</span><strong id="cohort-dated">0</strong></div>
             <div class="quality-stat"><span>Undated</span><strong id="cohort-undated">0</strong></div>
           </div>
-          <div class="trend-workspace">
-            <article class="card coverage-card">
-              <div class="toolbar"><div><p class="kicker">Evidence coverage</p><h3><span id="trend-item-count">0</span> unique evidence items</h3></div><span class="badge warn" id="trend-state-badge">Sample · not sentiment</span></div>
-              <div class="coverage-map" id="coverage-map" role="group" aria-label="Theme coverage map. Horizontal position shows unique sources. Vertical position shows represented people and companies.">
-                <span class="coverage-axis y">People + companies represented</span>
-                <span class="coverage-axis x">Unique sources →</span>
-                <div id="coverage-node-layer"></div>
-              </div>
-              <div class="coverage-legend" aria-label="Signal type legend">
-                <span><i class="legend-dot" style="--dot:#8f3f58"></i>Question</span>
-                <span><i class="legend-dot" style="--dot:#c15a4c"></i>Complaint</span>
-                <span><i class="legend-dot" style="--dot:#a36b13"></i>Launch</span>
-                <span><i class="legend-dot" style="--dot:#527360"></i>Company change</span>
-              </div>
-            </article>
-            <article class="card theme-detail-card" id="theme-detail" aria-live="polite"></article>
+          <div class="trend-panel" id="trend-panel-conversation" role="tabpanel" aria-labelledby="trend-tab-conversation" data-trend-panel="conversation">
+            <div class="lens-intro"><div><h3>Conversation intelligence</h3><p>Recurring questions and complaints from qualified people and companies, deduplicated before they influence a theme.</p></div><span class="scan-note">Bubble size = mentions<br>Position = source breadth</span></div>
+            <div class="trend-workspace">
+              <article class="card coverage-card">
+                <div class="toolbar"><div><p class="kicker">Evidence coverage</p><h3><span id="trend-item-count">0</span> unique evidence items</h3></div><span class="badge warn" id="trend-state-badge">Sample · not sentiment</span></div>
+                <div class="coverage-map" id="coverage-map" role="group" aria-label="Theme coverage map. Horizontal position shows unique sources. Vertical position shows represented people and companies.">
+                  <span class="coverage-axis y">People + companies represented</span>
+                  <span class="coverage-axis x">Unique sources →</span>
+                  <div id="coverage-node-layer"></div>
+                </div>
+                <div class="coverage-legend" aria-label="Signal type legend">
+                  <span><i class="legend-dot" style="--dot:#8f3f58"></i>Question</span>
+                  <span><i class="legend-dot" style="--dot:#c15a4c"></i>Complaint</span>
+                  <span><i class="legend-dot" style="--dot:#a36b13"></i>Launch</span>
+                  <span><i class="legend-dot" style="--dot:#527360"></i>Industry / company shift</span>
+                </div>
+              </article>
+              <article class="card theme-detail-card" id="theme-detail" aria-live="polite"></article>
+            </div>
+          </div>
+          <div class="trend-panel" id="trend-panel-activity" role="tabpanel" aria-labelledby="trend-tab-activity" data-trend-panel="activity" hidden>
+            <div class="lens-intro"><div><h3>Recent activity</h3><p>A chronological view of the person posts, company posts, and market-search results scanned in this window.</p></div><span class="scan-note" id="activity-source-summary">0 people · 0 company · 0 market posts</span></div>
+            <div class="activity-feed" id="trend-activity-feed"></div>
+          </div>
+          <div class="trend-panel" id="trend-panel-launches" role="tabpanel" aria-labelledby="trend-tab-launches" data-trend-panel="launches" hidden>
+            <div class="lens-intro"><div><h3>Product launches</h3><p>Posts containing explicit launch, release, rollout, or availability language. Each card is an observed announcement—not inferred buying intent.</p></div><span class="scan-note">People + company posts<br>Verified from source text</span></div>
+            <div class="signal-board" id="trend-launch-board"></div>
+          </div>
+          <div class="trend-panel" id="trend-panel-industry" role="tabpanel" aria-labelledby="trend-tab-industry" data-trend-panel="industry" hidden>
+            <div class="lens-intro"><div><h3>Industry shifts</h3><p>Broader changes represented across market searches and company activity, with sample breadth kept visible.</p></div><span class="scan-note">Current-window signal<br>Not a velocity claim</span></div>
+            <div class="signal-board" id="trend-industry-board"></div>
           </div>
           <article class="card trend-lead-roster">
             <div class="toolbar"><div><p class="kicker">Lead coverage</p><h3><span id="trend-roster-count">0</span> leads available</h3><p class="tiny muted">Every lead is visible here. Only dated, deduplicated post evidence can influence the coverage map.</p></div><span class="badge neutral" id="trend-roster-summary">0 evidence-ready</span></div>
@@ -1404,6 +1515,7 @@
         contentSlot: "slot-0",
         days: 30,
         theme: "forecast",
+        trendLens: "conversation",
         fitThreshold: 65,
         timingThreshold: 35,
         filmMode: false,
@@ -1413,22 +1525,45 @@
       };
 
       var examplePeople = [
-        { id:"p1", name:"Mara Voss", initials:"MV", role:"VP Revenue Operations", company:"HelioGrid", region:"Berlin", size:"180 employees", fit:92, timing:68, class:"Priority review", signal:"Team launched a new forecasting workflow", source:"SRC-01 + SRC-02", unknown:"Budget ownership", promoted:false },
-        { id:"p2", name:"Jon Bell", initials:"JB", role:"Director of Sales", company:"Northpine", region:"London", size:"75 employees", fit:61, timing:20, class:"Possible", signal:"Discussed CRM hygiene in a sampled post", source:"SRC-06", unknown:"Current planning stack", promoted:false },
-        { id:"p3", name:"Leila Chen", initials:"LC", role:"Head of GTM", company:"Copilot Works", region:"Munich", size:"240 employees", fit:88, timing:74, class:"Priority review", signal:"Public profile shows a recent promotion", source:"SRC-04 + SRC-07", unknown:"Forecast process owner", promoted:true },
-        { id:"p4", name:"Theo Martin", initials:"TM", role:"VP Sales", company:"Quanta Harbor", region:"Manchester", size:"310 employees", fit:84, timing:46, class:"Priority review", signal:"Company announced a regional expansion", source:"SRC-08 + SRC-09", unknown:"CRM vendor", promoted:false },
-        { id:"p5", name:"Nora Adeyemi", initials:"NA", role:"Revenue Operations Lead", company:"Sable Cloud", region:"Hamburg", size:"125 employees", fit:79, timing:52, class:"Priority review", signal:"Asked how teams validate rep-entered forecasts", source:"SRC-10", unknown:"Procurement timeline", promoted:false },
-        { id:"p6", name:"Samira Koch", initials:"SK", role:"Founder", company:"SignalNest", region:"Vienna", size:"18 employees", fit:48, timing:31, class:"Not now", signal:"Relevant topic, company below target size", source:"SRC-11", unknown:"Sales team structure", promoted:false },
-        { id:"p7", name:"Owen Price", initials:"OP", role:"Growth Lead", company:"Paperkite", region:"London", size:"95 employees", fit:44, timing:39, class:"Not now", signal:"Adjacent role with limited forecast ownership", source:"SRC-12", unknown:"Revenue responsibility", promoted:false },
-        { id:"p8", name:"Elias Brunn", initials:"EB", role:"Director of Customer Success", company:"Brightlane", region:"Zurich", size:"420 employees", fit:38, timing:12, class:"Not now", signal:"Company fits, role does not match the ICP", source:"SRC-13", unknown:"Sales planning involvement", promoted:false }
+        { id:"p1", name:"Mara Voss", initials:"MV", role:"VP Revenue Operations", company:"HelioGrid", region:"Berlin", size:"180 employees", fit:92, timing:68, class:"Priority review", signal:"Team launched a new forecasting workflow", source:"SRC-01 + SRC-02", unknown:"Budget ownership", promoted:false, trendQualified:true },
+        { id:"p2", name:"Jon Bell", initials:"JB", role:"Director of Sales", company:"Northpine", region:"London", size:"75 employees", fit:61, timing:20, class:"Possible", signal:"Discussed CRM hygiene in a sampled post", source:"SRC-06", unknown:"Current planning stack", promoted:false, trendQualified:false },
+        { id:"p3", name:"Leila Chen", initials:"LC", role:"Head of GTM", company:"Copilot Works", region:"Munich", size:"240 employees", fit:88, timing:74, class:"Priority review", signal:"Public profile shows a recent promotion", source:"SRC-04 + SRC-07", unknown:"Forecast process owner", promoted:true, trendQualified:true },
+        { id:"p4", name:"Theo Martin", initials:"TM", role:"VP Sales", company:"Quanta Harbor", region:"Manchester", size:"310 employees", fit:84, timing:46, class:"Priority review", signal:"Company announced a regional expansion", source:"SRC-08 + SRC-09", unknown:"CRM vendor", promoted:false, trendQualified:true },
+        { id:"p5", name:"Nora Adeyemi", initials:"NA", role:"Revenue Operations Lead", company:"Sable Cloud", region:"Hamburg", size:"125 employees", fit:79, timing:52, class:"Priority review", signal:"Asked how teams validate rep-entered forecasts", source:"SRC-10", unknown:"Procurement timeline", promoted:false, trendQualified:true },
+        { id:"p6", name:"Samira Koch", initials:"SK", role:"Founder", company:"SignalNest", region:"Vienna", size:"18 employees", fit:48, timing:31, class:"Not now", signal:"Relevant topic, company below target size", source:"SRC-11", unknown:"Sales team structure", promoted:false, trendQualified:false },
+        { id:"p7", name:"Owen Price", initials:"OP", role:"Growth Lead", company:"Paperkite", region:"London", size:"95 employees", fit:44, timing:39, class:"Not now", signal:"Adjacent role with limited forecast ownership", source:"SRC-12", unknown:"Revenue responsibility", promoted:false, trendQualified:false },
+        { id:"p8", name:"Elias Brunn", initials:"EB", role:"Director of Customer Success", company:"Brightlane", region:"Zurich", size:"420 employees", fit:38, timing:12, class:"Not now", signal:"Company fits, role does not match the ICP", source:"SRC-13", unknown:"Sales planning involvement", promoted:false, trendQualified:false }
       ];
 
       var exampleThemes = [
         { id:"forecast", label:"Forecast trust", count:5, days:30, type:"Repeated question", summary:"Operators in the sample keep asking how to trust a forecast when CRM updates arrive late or use inconsistent definitions.", interpretation:"A practical content angle is to show the checks that make a forecast defensible before the weekly call.", sources:"SRC-03, SRC-10, SRC-14, SRC-15, SRC-16", quote:"How do you separate a real forecast change from reps simply updating the CRM late?", quoteBy:"Example paraphrase · sampled post · 6 Sep" },
         { id:"hygiene", label:"CRM hygiene without policing", count:4, days:30, type:"Repeated complaint", summary:"Several sampled posts describe data cleanup as a management burden rather than a seller habit.", interpretation:"The useful angle is workflow design, not another lecture about better data discipline.", sources:"SRC-06, SRC-17, SRC-18, SRC-19", quote:"The dashboard is only as current as the last round of reminders.", quoteBy:"Example paraphrase · sampled post · 9 Sep" },
         { id:"ai", label:"AI workflow adoption", count:4, days:14, type:"Industry change", summary:"Teams are discussing how to introduce AI into revenue operations without losing auditability.", interpretation:"Show the human approval gate and evidence trail, not a fully autonomous promise.", sources:"SRC-20, SRC-21, SRC-22, SRC-23", quote:"Automation is easy. Knowing why the number changed is the hard part.", quoteBy:"Example paraphrase · sampled post · 12 Sep" },
+        { id:"product-launches", label:"New RevOps products", count:3, days:14, type:"Launch", summary:"The sample includes explicit announcements for forecast review, approval, and pipeline inspection features.", interpretation:"Compare what the new releases make easier without treating an announcement as proof of adoption.", sources:"SRC-02, SRC-21, SRC-23", quote:"The new review workspace is now available to revenue teams.", quoteBy:"Example paraphrase · company announcement · 10 Sep" },
         { id:"handoff", label:"Pipeline handoffs", count:3, days:30, type:"Repeated complaint", summary:"The sample points to context loss between marketing, sales, and revenue operations.", interpretation:"A cross-functional handoff checklist can turn this into a practical post.", sources:"SRC-24, SRC-25, SRC-26", quote:"The signal existed, but it disappeared between teams.", quoteBy:"Example paraphrase · sampled post · 2 Sep" },
         { id:"dach", label:"DACH buying controls", count:2, days:30, type:"Market change", summary:"Two company updates mention tighter review of data access and AI tooling in revenue workflows.", interpretation:"Treat this as an emerging signal and verify it with a wider sample before making a market claim.", sources:"SRC-27, SRC-28", quote:"New tooling now needs a clearer data access story before the pilot.", quoteBy:"Example paraphrase · company update · 29 Aug" }
+      ];
+
+      var exampleTrendEvidence = [
+        { id:"SRC-02", sourceId:"SRC-02", personId:"p1", companyId:"heliogrid", subjectName:"HelioGrid", type:"company_post", url:"", excerpt:"HelioGrid announced a new forecast review workspace designed to show late CRM changes before the weekly call.", publishedAt:"2026-09-11T09:00:00.000Z", ageDays:10, retrievedAt:"2026-09-21T09:12:00.000Z", matchedTerms:["announced","forecast"], themeIds:["forecast","product-launches"] },
+        { id:"SRC-03", sourceId:"SRC-03", personId:"p1", companyId:"heliogrid", subjectName:"Mara Voss", type:"person_post", url:"", excerpt:"How do you separate a real forecast change from reps simply updating the CRM late?", publishedAt:"2026-09-15T08:00:00.000Z", ageDays:6, retrievedAt:"2026-09-21T09:13:00.000Z", matchedTerms:["forecast","crm"], themeIds:["forecast","hygiene"] },
+        { id:"SRC-06", sourceId:"SRC-06", personId:"p1", companyId:"heliogrid", subjectName:"Mara Voss", type:"person_post", url:"", excerpt:"The dashboard is only as current as the last round of reminders. CRM hygiene should be built into the handoff, not chased afterward.", publishedAt:"2026-09-12T10:00:00.000Z", ageDays:9, retrievedAt:"2026-09-21T09:15:00.000Z", matchedTerms:["crm","handoff"], themeIds:["hygiene","handoff"] },
+        { id:"SRC-10", sourceId:"SRC-10", personId:"p5", companyId:"sable-cloud", subjectName:"Nora Adeyemi", type:"person_post", url:"", excerpt:"What evidence do RevOps teams use to validate a rep-entered forecast before the number reaches leadership?", publishedAt:"2026-09-18T14:00:00.000Z", ageDays:3, retrievedAt:"2026-09-21T09:19:00.000Z", matchedTerms:["forecast","evidence"], themeIds:["forecast"] },
+        { id:"SRC-14", sourceId:"SRC-14", personId:"p4", companyId:"quanta-harbor", subjectName:"Theo Martin", type:"person_post", url:"", excerpt:"Regional expansion exposed three different definitions of commit across the sales team, making the same forecast harder to defend.", publishedAt:"2026-09-08T11:00:00.000Z", ageDays:13, retrievedAt:"2026-09-21T09:21:00.000Z", matchedTerms:["forecast","expansion"], themeIds:["forecast","dach"] },
+        { id:"SRC-15", sourceId:"SRC-15", personId:"p3", companyId:"copilot-works", subjectName:"Leila Chen", type:"person_post", url:"", excerpt:"Forecast confidence improves when every number carries the source and owner of the latest change.", publishedAt:"2026-09-04T09:00:00.000Z", ageDays:17, retrievedAt:"2026-09-21T09:22:00.000Z", matchedTerms:["forecast","confidence"], themeIds:["forecast"] },
+        { id:"SRC-16", sourceId:"SRC-16", personId:"p5", companyId:"sable-cloud", subjectName:"Sable Cloud", type:"company_post", url:"", excerpt:"The team shared a monthly operating review focused on forecast confidence, exceptions, and source ownership.", publishedAt:"2026-08-29T09:00:00.000Z", ageDays:23, retrievedAt:"2026-09-21T09:23:00.000Z", matchedTerms:["forecast","confidence"], themeIds:["forecast"] },
+        { id:"SRC-17", sourceId:"SRC-17", personId:"p1", companyId:"heliogrid", subjectName:"Mara Voss", type:"person_post", url:"", excerpt:"CRM cleanup turns into policing when the system cannot show where a required field fits into the decision process.", publishedAt:"2026-09-16T13:00:00.000Z", ageDays:5, retrievedAt:"2026-09-21T09:24:00.000Z", matchedTerms:["crm","data quality"], themeIds:["hygiene"] },
+        { id:"SRC-18", sourceId:"SRC-18", personId:"p3", companyId:"copilot-works", subjectName:"Copilot Works", type:"company_post", url:"", excerpt:"Copilot Works described replacing end-of-quarter CRM cleanups with validation inside the opportunity workflow.", publishedAt:"2026-09-07T08:00:00.000Z", ageDays:14, retrievedAt:"2026-09-21T09:26:00.000Z", matchedTerms:["crm","workflow"], themeIds:["hygiene"] },
+        { id:"SRC-19", sourceId:"SRC-19", personId:"p5", companyId:"sable-cloud", subjectName:"Nora Adeyemi", type:"person_post", url:"", excerpt:"If data quality depends on another reminder, the operating design is still asking people to compensate for the workflow.", publishedAt:"2026-08-30T15:00:00.000Z", ageDays:22, retrievedAt:"2026-09-21T09:27:00.000Z", matchedTerms:["data quality","workflow"], themeIds:["hygiene"] },
+        { id:"SRC-20", sourceId:"SRC-20", personId:"p3", companyId:"copilot-works", subjectName:"Leila Chen", type:"person_post", url:"", excerpt:"Automation is easy. Knowing why the number changed—and who approved it—is the hard part of bringing AI into RevOps.", publishedAt:"2026-09-19T09:00:00.000Z", ageDays:2, retrievedAt:"2026-09-21T09:29:00.000Z", matchedTerms:["automation","ai"], themeIds:["ai"] },
+        { id:"SRC-21", sourceId:"SRC-21", personId:"p3", companyId:"copilot-works", subjectName:"Copilot Works", type:"company_post", url:"", excerpt:"Copilot Works launched approval checkpoints for AI-assisted pipeline updates, with the underlying source kept visible for reviewers.", publishedAt:"2026-09-17T09:00:00.000Z", ageDays:4, retrievedAt:"2026-09-21T09:30:00.000Z", matchedTerms:["launched","ai","approval"], themeIds:["ai","product-launches"] },
+        { id:"SRC-22", sourceId:"SRC-22", personId:"", companyId:"", subjectName:"LinkedIn market search", type:"market_post", url:"", excerpt:"Revenue operations leaders are comparing AI assistants on auditability, human approval, and the quality of their source trail.", publishedAt:"2026-09-13T10:00:00.000Z", ageDays:8, retrievedAt:"2026-09-21T09:31:00.000Z", matchedTerms:["ai","auditability"], themeIds:["ai","dach"] },
+        { id:"SRC-23", sourceId:"SRC-23", personId:"p1", companyId:"heliogrid", subjectName:"HelioGrid", type:"company_post", url:"", excerpt:"A new source-inspection panel is now available in HelioGrid, allowing managers to review AI suggestions before forecast changes are accepted.", publishedAt:"2026-09-14T09:00:00.000Z", ageDays:7, retrievedAt:"2026-09-21T09:32:00.000Z", matchedTerms:["new","now available","ai"], themeIds:["ai","product-launches"] },
+        { id:"SRC-24", sourceId:"SRC-24", personId:"p4", companyId:"quanta-harbor", subjectName:"Theo Martin", type:"person_post", url:"", excerpt:"The intent signal existed, but it disappeared between marketing qualification and the sales planning meeting.", publishedAt:"2026-09-02T11:00:00.000Z", ageDays:19, retrievedAt:"2026-09-21T09:34:00.000Z", matchedTerms:["handoff","marketing and sales"], themeIds:["handoff"] },
+        { id:"SRC-25", sourceId:"SRC-25", personId:"p3", companyId:"copilot-works", subjectName:"Leila Chen", type:"person_post", url:"", excerpt:"Pipeline reviews slow down when every team brings a different version of the buyer context into the handoff.", publishedAt:"2026-09-10T12:00:00.000Z", ageDays:11, retrievedAt:"2026-09-21T09:35:00.000Z", matchedTerms:["pipeline","handoff"], themeIds:["handoff"] },
+        { id:"SRC-26", sourceId:"SRC-26", personId:"p5", companyId:"sable-cloud", subjectName:"Sable Cloud", type:"company_post", url:"", excerpt:"Sable Cloud shared a new revenue-team handoff template that keeps the customer problem and evidence with the opportunity.", publishedAt:"2026-08-28T10:00:00.000Z", ageDays:24, retrievedAt:"2026-09-21T09:36:00.000Z", matchedTerms:["handoff"], themeIds:["handoff"] },
+        { id:"SRC-27", sourceId:"SRC-27", personId:"p4", companyId:"quanta-harbor", subjectName:"Quanta Harbor", type:"company_post", url:"", excerpt:"Quanta Harbor’s DACH expansion update adds a formal data-access review before new AI tools can enter a pilot.", publishedAt:"2026-08-29T08:00:00.000Z", ageDays:23, retrievedAt:"2026-09-21T09:38:00.000Z", matchedTerms:["expansion","ai","data access"], themeIds:["dach"] },
+        { id:"SRC-28", sourceId:"SRC-28", personId:"", companyId:"", subjectName:"LinkedIn market search", type:"market_post", url:"", excerpt:"Several DACH revenue teams are asking vendors to explain browser access, retained data, and human review before an AI workflow pilot.", publishedAt:"2026-09-01T09:00:00.000Z", ageDays:20, retrievedAt:"2026-09-21T09:39:00.000Z", matchedTerms:["dach","ai","human review"], themeIds:["dach","ai"] }
       ];
 
       var exampleDrafts = {
@@ -1498,7 +1633,7 @@
       var themes = exampleThemes.map(function (theme) { return Object.assign({}, theme); });
       var drafts = Object.assign({}, exampleDrafts);
       var contentIdeas = exampleContentIdeas.slice();
-      var trendEvidence = [];
+      var trendEvidence = exampleTrendEvidence.map(function (item) { return Object.assign({}, item, { matchedTerms:(item.matchedTerms || []).slice(), themeIds:(item.themeIds || []).slice() }); });
       var trendCohort = { collected: 8, qualified: 4, excluded: 4, uniqueSources: 19, datedEvidence: 19, undatedEvidence: 0, exclusionReasons: [] };
       var trendProvisional = false;
       var liveRunMeta = null;
@@ -1702,7 +1837,7 @@
         themes = exampleThemes.map(function (theme) { return Object.assign({}, theme); });
         drafts = Object.assign({}, exampleDrafts);
         contentIdeas = exampleContentIdeas.slice();
-        trendEvidence = [];
+        trendEvidence = exampleTrendEvidence.map(function (item) { return Object.assign({}, item, { matchedTerms:(item.matchedTerms || []).slice(), themeIds:(item.themeIds || []).slice() }); });
         trendCohort = { collected: 8, qualified: 4, excluded: 4, uniqueSources: 19, datedEvidence: 19, undatedEvidence: 0, exclusionReasons: [] };
         trendProvisional = false;
         liveRunMeta = null;
@@ -1894,13 +2029,14 @@
         document.getElementById("cohort-sources").textContent = trendCohort.uniqueSources || 0;
         document.getElementById("cohort-dated").textContent = trendCohort.datedEvidence || 0;
         document.getElementById("cohort-undated").textContent = trendCohort.undatedEvidence || 0;
-        document.getElementById("trend-state-badge").textContent = trendProvisional ? "Updating · provisional" : "Sample · not sentiment";
+        document.getElementById("trend-state-badge").textContent = trendProvisional ? "Updating · provisional" : state.mode === "live" ? "Live source coverage" : "Example · not sentiment";
         document.querySelectorAll("[data-days]").forEach(function (button) {
           var active = Number(button.dataset.days) === state.days;
           button.classList.toggle("active", active);
           button.setAttribute("aria-pressed", String(active));
         });
         renderTrendLeadRoster();
+        renderTrendLenses(available);
 
         var periodEvidenceIds = new Set();
         available.forEach(function (theme) {
@@ -1970,11 +2106,149 @@
         grid.innerHTML = rows.length ? rows.join("") : '<p class="small-copy">No sourced leads are stored in this workspace.</p>';
       }
 
+      function trendEvidenceInWindow() {
+        return trendEvidence.filter(function (item) {
+          return /^(person_post|company_post|market_post)$/.test(item.type || "") && item.ageDays != null && Number(item.ageDays) <= state.days;
+        }).sort(function (a, b) {
+          return Number(a.ageDays) - Number(b.ageDays) || String(b.publishedAt || "").localeCompare(String(a.publishedAt || ""));
+        });
+      }
+
+      function isLaunchEvidence(item) {
+        var text = String(item.excerpt || "").toLowerCase();
+        return /\b(launch(?:ed|ing)?|announc(?:e|ed|ement)|introduc(?:e|ed|ing)|releas(?:e|ed)|roll(?:ed|ing)? out|now available|new (?:product|feature|platform|module|workspace|panel))\b/.test(text);
+      }
+
+      function evidenceAge(item) {
+        if (item.ageDays == null) return "Undated";
+        if (Number(item.ageDays) === 0) return "Today";
+        return item.ageDays + " day" + (Number(item.ageDays) === 1 ? "" : "s") + " ago";
+      }
+
+      function evidenceSourceLabel(type) {
+        if (type === "person_post") return "Person post";
+        if (type === "company_post") return "Company post";
+        if (type === "market_post") return "Market search";
+        return String(type || "Source").replace(/_/g, " ");
+      }
+
+      function evidenceAction(item) {
+        return item.url
+          ? '<a class="source-action" href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener noreferrer">Open source</a>'
+          : '<span class="source-placeholder">Example source receipt</span>';
+      }
+
+      function themeLabelsForEvidence(item) {
+        var lookup = new Map(themes.map(function (theme) { return [theme.id, theme.label]; }));
+        return (item.themeIds || []).map(function (id) { return lookup.get(id) || id; });
+      }
+
+      function renderTrendLenses(availableThemes) {
+        var valid = ["conversation", "activity", "launches", "industry"];
+        if (valid.indexOf(state.trendLens) === -1) state.trendLens = "conversation";
+        var evidence = trendEvidenceInWindow();
+        var launches = evidence.filter(isLaunchEvidence);
+        var industryThemes = availableThemes.filter(function (theme) {
+          return /(industry|market|company change)/i.test(theme.type || "");
+        });
+        var industryEvidence = evidence.filter(function (item) {
+          if (item.type === "market_post") return true;
+          return (item.themeIds || []).some(function (id) {
+            return industryThemes.some(function (theme) { return theme.id === id; });
+          });
+        });
+
+        document.getElementById("lens-count-conversation").textContent = availableThemes.length;
+        document.getElementById("lens-count-activity").textContent = evidence.length;
+        document.getElementById("lens-count-launches").textContent = launches.length;
+        document.getElementById("lens-count-industry").textContent = industryThemes.length || industryEvidence.length;
+        document.querySelectorAll("[data-trend-lens]").forEach(function (button) {
+          var active = button.dataset.trendLens === state.trendLens;
+          button.setAttribute("aria-selected", String(active));
+          button.tabIndex = active ? 0 : -1;
+        });
+        document.querySelectorAll("[data-trend-panel]").forEach(function (panel) {
+          panel.hidden = panel.dataset.trendPanel !== state.trendLens;
+        });
+        renderActivityLens(evidence);
+        renderLaunchLens(launches);
+        renderIndustryLens(industryThemes, industryEvidence);
+      }
+
+      function renderActivityLens(evidence) {
+        var feed = document.getElementById("trend-activity-feed");
+        var personCount = evidence.filter(function (item) { return item.type === "person_post"; }).length;
+        var companyCount = evidence.filter(function (item) { return item.type === "company_post"; }).length;
+        var marketCount = evidence.filter(function (item) { return item.type === "market_post"; }).length;
+        document.getElementById("activity-source-summary").textContent = personCount + " person · " + companyCount + " company · " + marketCount + " market posts";
+        if (!evidence.length) {
+          feed.innerHTML = '<div class="lens-empty">No dated post activity is available in this window. Live mode will add person, company, and market-search receipts as they arrive.</div>';
+          return;
+        }
+        feed.innerHTML = evidence.map(function (item) {
+          var labels = themeLabelsForEvidence(item);
+          var chips = labels.slice(0, 3).map(function (label) { return '<span class="metric-chip">' + escapeHtml(label) + '</span>'; }).join("");
+          return '<article class="activity-row"><div class="activity-source">' + escapeHtml(evidenceSourceLabel(item.type)) + '<strong>' + escapeHtml(item.subjectName || "LinkedIn source") + '</strong></div><div class="activity-copy"><p>' + escapeHtml(item.excerpt) + '</p>' + (chips ? '<div class="metric-row">' + chips + '</div>' : '') + '</div><div class="activity-date">' + escapeHtml(evidenceAge(item)) + evidenceAction(item) + '</div></article>';
+        }).join("");
+      }
+
+      function renderLaunchLens(launches) {
+        var board = document.getElementById("trend-launch-board");
+        if (!launches.length) {
+          board.innerHTML = '<div class="lens-empty" style="grid-column:1/-1">No explicit launch language was found in this window. The scanner will not re-label a generic company update as a product launch.</div>';
+          return;
+        }
+        board.innerHTML = launches.map(function (item) {
+          var terms = (item.matchedTerms || []).slice(0, 3).map(function (term) { return '<span class="metric-chip">' + escapeHtml(term) + '</span>'; }).join("");
+          return '<article class="signal-card"><div class="signal-card-head"><div><span class="badge warn">Observed announcement</span><h4>' + escapeHtml(item.subjectName || "LinkedIn source") + '</h4></div><div class="activity-date">' + escapeHtml(evidenceAge(item)) + '</div></div><p>' + escapeHtml(item.excerpt) + '</p>' + (terms ? '<div class="metric-row">' + terms + '</div>' : '') + '<div class="signal-proof"><strong>' + escapeHtml(evidenceSourceLabel(item.type)) + '</strong><span>Retrieved ' + escapeHtml(item.retrievedAt ? new Date(item.retrievedAt).toLocaleString([], { dateStyle:"medium", timeStyle:"short" }) : "time unavailable") + '</span>' + evidenceAction(item) + '</div></article>';
+        }).join("");
+      }
+
+      function renderIndustryLens(industryThemes, industryEvidence) {
+        var board = document.getElementById("trend-industry-board");
+        if (!industryThemes.length && !industryEvidence.length) {
+          board.innerHTML = '<div class="lens-empty" style="grid-column:1/-1">No broader industry or company-change signal is supported in this window. A wider sample may be needed.</div>';
+          return;
+        }
+        if (industryThemes.length) {
+          var evidenceById = new Map(trendEvidence.map(function (item) { return [item.id, item]; }));
+          board.innerHTML = industryThemes.map(function (theme) {
+            var metrics = theme.periods[String(state.days)];
+            var sample = (metrics.evidenceIds || []).map(function (id) { return evidenceById.get(id); }).filter(Boolean)[0];
+            var breadth = metrics.distinctPeople + metrics.distinctCompanies;
+            return '<article class="signal-card"><div class="signal-card-head"><div><span class="badge good">Broader signal candidate</span><h4>' + escapeHtml(theme.label) + '</h4></div><span class="metric-chip">' + metrics.uniqueSources + ' sources</span></div><p>' + escapeHtml(theme.summary || theme.interpretation || "Observed across the current qualified sample.") + '</p><div class="metric-row"><span class="metric-chip">' + metrics.mentions + ' mentions</span><span class="metric-chip">' + breadth + ' represented</span><span class="metric-chip">' + state.days + '-day window</span></div>' + (sample ? '<div class="signal-proof"><strong>Representative source</strong><span>' + escapeHtml(sample.excerpt) + '</span>' + evidenceAction(sample) + '</div>' : '') + '</article>';
+          }).join("");
+          return;
+        }
+        board.innerHTML = industryEvidence.map(function (item) {
+          return '<article class="signal-card"><span class="badge good">Market-search receipt</span><h4>' + escapeHtml(item.subjectName || "LinkedIn market search") + '</h4><p>' + escapeHtml(item.excerpt) + '</p><div class="signal-proof"><strong>' + escapeHtml(evidenceAge(item)) + '</strong>' + evidenceAction(item) + '</div></article>';
+        }).join("");
+      }
+
       function normalizeThemeForView(theme) {
         if (theme.periods && theme.metrics) return theme;
         var count = Number(theme.count || 0);
         var sourceIds = String(theme.sources || "").split(",").map(function (value) { return value.trim(); }).filter(Boolean);
         function periodMetrics(days) {
+          var matched = trendEvidence.filter(function (item) {
+            return (sourceIds.indexOf(item.id) !== -1 || sourceIds.indexOf(item.sourceId) !== -1 || (item.themeIds || []).indexOf(theme.id) !== -1) && item.ageDays != null && Number(item.ageDays) <= days;
+          });
+          if (matched.length) {
+            var contributorCounts = {};
+            matched.forEach(function (item) {
+              var key = item.personId || item.companyId || item.sourceId || item.id;
+              contributorCounts[key] = (contributorCounts[key] || 0) + 1;
+            });
+            var topCount = Math.max.apply(null, Object.keys(contributorCounts).map(function (key) { return contributorCounts[key]; }));
+            return {
+              mentions: matched.length,
+              uniqueSources: new Set(matched.map(function (item) { return item.url || item.sourceId || item.id; })).size,
+              distinctPeople: new Set(matched.map(function (item) { return item.personId; }).filter(Boolean)).size,
+              distinctCompanies: new Set(matched.map(function (item) { return item.companyId; }).filter(Boolean)).size,
+              evidenceIds: matched.map(function (item) { return item.id; }),
+              topContributorShare: topCount / matched.length
+            };
+          }
           var included = Number(theme.days || 30) <= days;
           return { mentions: included ? count : 0, uniqueSources: included ? sourceIds.length : 0, distinctPeople: included ? Math.min(count, 4) : 0, distinctCompanies: included ? Math.min(count, 3) : 0, evidenceIds: included ? sourceIds : [], topContributorShare: included && count ? 1 / Math.min(count, 4) : 0 };
         }
@@ -1991,7 +2265,8 @@
         var value = String(type || "").toLowerCase();
         if (value.indexOf("question") !== -1) return "type-question";
         if (value.indexOf("complaint") !== -1) return "type-complaint";
-        if (value.indexOf("launch") !== -1 || value.indexOf("industry") !== -1 || value.indexOf("market") !== -1) return "type-launch";
+        if (value.indexOf("launch") !== -1) return "type-launch";
+        if (value.indexOf("industry") !== -1 || value.indexOf("market") !== -1 || value.indexOf("change") !== -1) return "type-change";
         return "type-change";
       }
 
@@ -2743,6 +3018,25 @@
           state.writerView = button.dataset.writerView;
           saveState();
           updateWriterView();
+        });
+      });
+
+      document.querySelectorAll("[data-trend-lens]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          state.trendLens = button.dataset.trendLens;
+          saveState();
+          renderThemes();
+        });
+        button.addEventListener("keydown", function (event) {
+          if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+          var tabs = Array.from(document.querySelectorAll("[data-trend-lens]"));
+          var index = tabs.indexOf(button);
+          if (event.key === "Home") index = 0;
+          else if (event.key === "End") index = tabs.length - 1;
+          else index = (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+          event.preventDefault();
+          tabs[index].click();
+          tabs[index].focus();
         });
       });
 

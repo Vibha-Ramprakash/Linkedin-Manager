@@ -109,7 +109,16 @@ Example-mode edits and review decisions are stored in browser local storage. Evi
 
 ## Evidence-first Trend Scanner
 
-Trend Scanner uses only profiles that meet the supported role, company/market, and fit requirements. A market-post search may enrich that qualified cohort but cannot replace one; zero qualified profiles produce zero themes. It deduplicates source receipts, excludes undated items from 7/14/30-day totals, and recomputes appended runs from the merged evidence set instead of adding old totals. The coverage map uses unique sources horizontally, represented people and companies vertically, and deduplicated mentions for bubble size. Selecting a bubble exposes observation metrics, a cautious interpretation, an editable content angle, and direct source links.
+Trend Scanner uses only profiles that meet the supported role, company/market, and fit requirements. A market-post search may enrich that qualified cohort but cannot replace one; zero qualified profiles produce zero themes. It deduplicates source receipts, excludes undated items from 7/14/30-day totals, and recomputes appended runs from the merged evidence set instead of adding old totals.
+
+Four keyboard-operable views make the research easier to inspect:
+
+- **What people discuss** maps recurring questions, complaints, launches, and changes by source breadth.
+- **Recent activity** shows the dated person posts, company posts, and market-search receipts in chronological order.
+- **Product launches** shows only posts with explicit launch, release, rollout, or availability language and labels them as observed announcements—not purchase intent.
+- **Industry shifts** groups wider market and company-change signals while stating that a current-window sample is not a velocity claim.
+
+The coverage map uses unique sources horizontally, represented people and companies vertically, and deduplicated mentions for bubble size. Selecting a bubble exposes observation metrics, a cautious interpretation, an editable content angle, and direct source links. The hosted example includes clearly labelled illustrative receipts; live mode uses the same views with LinkedIn source URLs and retrieval times returned by the local connector.
 
 ## Evidence-led Content Map
 

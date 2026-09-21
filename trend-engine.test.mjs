@@ -130,6 +130,18 @@ test("dominant contributor share is calculated from deduplicated evidence", () =
   assert.equal(report.themes.find((theme) => theme.id === "forecast").topContributorShare, 2 / 3);
 });
 
+test("separates explicit product launches from broader AI and market shifts", () => {
+  const p1 = qualifiedPerson();
+  const evidence = [
+    ...postEvidence({ sourceId: "LAUNCH-1", personId: "p1", companyId: "northstar", url: "https://www.linkedin.com/posts/launch", text: "2 days ago\nWe launched a new feature for human approval of AI forecast changes." }),
+    ...postEvidence({ sourceId: "MARKET-1", personId: "p1", companyId: "northstar", url: "https://www.linkedin.com/posts/market-shift", text: "5 days ago\nRevenue operations teams are revisiting data access in their go-to-market workflow." })
+  ];
+  const report = buildTrendReport({ people: [p1], evidence, periodDays: 30 });
+  assert.equal(report.themes.find((theme) => theme.id === "product-launch").metrics.mentions, 1);
+  assert.equal(report.themes.find((theme) => theme.id === "ai").type, "Industry change");
+  assert.equal(report.themes.find((theme) => theme.id === "market-shift").metrics.mentions, 2);
+});
+
 test("26 receipts remain 26 unique evidence items after duplicate additive input", () => {
   const p1 = qualifiedPerson();
   const receipts = Array.from({ length: 26 }, (_, index) => postEvidence({

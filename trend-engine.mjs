@@ -18,9 +18,16 @@ export const THEME_RULES = [
   {
     id: "ai",
     label: "AI workflow adoption",
-    type: "Launch",
+    type: "Industry change",
     terms: ["ai", "automation", "copilot", "agent"],
     contentAngle: "Explain the human approval and evidence layer required for responsible AI adoption."
+  },
+  {
+    id: "product-launch",
+    label: "Product launches",
+    type: "Launch",
+    terms: ["launched", "announced", "introducing", "released", "rollout", "now available", "new feature", "new product"],
+    contentAngle: "Compare what the observed launches make easier, while keeping announcement, adoption, and outcome as separate claims."
   },
   {
     id: "handoff",
@@ -35,6 +42,13 @@ export const THEME_RULES = [
     type: "Company change",
     terms: ["launch", "hiring", "expansion", "promotion", "new role"],
     contentAngle: "Show how teams can keep revenue definitions stable during launches, hiring, and expansion."
+  },
+  {
+    id: "market-shift",
+    label: "Revenue operating model shifts",
+    type: "Market change",
+    terms: ["go-to-market", "revenue operations", "revops", "buyer process", "budget cycle", "data access", "human approval"],
+    contentAngle: "Explain the operating change visible in the sample and name what still needs a wider market check."
   }
 ];
 
