@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "linkedin-visible": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-linkedin@latest",
+        "--no-headless",
+        "--slow-mo",
+        "350",
+        "--browser-idle-timeout",
+        "0"
+      ],
+      "env": {
+        "UV_HTTP_TIMEOUT": "300"
+      },
+      "lifecycle": {
+        "mode": "keep-alive",
+        "idleTimeoutMs": 1800000
+      }
+    }
+  }
+}
